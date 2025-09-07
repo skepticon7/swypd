@@ -11,7 +11,7 @@ const SectionWrapper = (Component , idName) =>
                 initial="hidden"
                 whileInView="show"
                 viewport={{once : true , amount : 0.35}}
-                className={`max-w-[100rem] mx-auto`}
+                className={`max-w-[80rem] mx-auto`}
             >
                 <Component/>
             </motion.section>

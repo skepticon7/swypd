@@ -17,10 +17,42 @@ import partyValues from './party-values.png';
 import partyValues2 from './party-2-values.png';
 import service1values from './service1.jpg';
 import service2values from './service2.jpg'
-import projectSlime from './projects-slime.png'
+import projectSlime from './projects-slime.svg'
+import discover from './discover.svg';
+import launch from "./launch.svg";
+import support from "./support.svg";
+import create from "./create.svg";
+import ad from './ad.svg';
+import branding from "./branding.svg";
+import check from './check.svg';
+import coding from "./coding.svg";
+import pricingSlime from "./pricing-slime.svg";
+import ve from "./video-editing.svg";
+import SwypdLogo  from "./swypd-logo.svg?react";
+import Linkedin from "./LinkedIn.svg?react";
+import X from "./x.svg?react";
+import Instagram from "./Instagram.svg?react"
+import Facebook from "./Facebook.svg?react"
+import Tiktok from "./tiktok.svg?react"
+
 
 export {
-    swypdLogo,
+    SwypdLogo,
+    Tiktok,
+    Facebook,
+    Instagram,
+    Linkedin,
+    X,
+    ad,
+    branding,
+    check,
+    coding,
+    pricingSlime,
+    ve,
+    discover,
+    create,
+    support,
+    launch,
     djValues,
     projectSlime,
     swypdValues,

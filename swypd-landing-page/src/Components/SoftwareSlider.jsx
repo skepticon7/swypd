@@ -2,7 +2,7 @@ import {sliderItems} from "../constants/index.js";
 
 export const SoftwareSlider = () => {
     return (
-        <div className='py-24 flex flex-col items-center justify-start gap-10'>
+        <div className='py-28 flex flex-col items-center justify-start gap-10'>
             <p className='oswald-semibold text-tertiary-white text-2xl'>Our tools</p>
             <div className="relative overflow-hidden w-full ">
                 <div
