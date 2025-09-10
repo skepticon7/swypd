@@ -1,10 +1,9 @@
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
-import {motion} from "framer-motion";
-import {fadeIn} from "../Utils/motion.js";
 import {pricing} from "../constants/index.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {check, pricingSlime} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
+import {ContactModal} from "./index.js";
 
 
 const PriceCard = ({values  ,selected ,  setSelected }) => {
@@ -26,30 +25,30 @@ const PriceCard = ({values  ,selected ,  setSelected }) => {
     };
     return (
         <div className={`flex items-center justify-between  w-full h-full `}>
-            <div className='flex items-center justify-center gap-7'>
+            <div className='flex items-center justify-center md:gap-6 sm:gap-5 xs:gap-4'>
                 <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={handleChange}
-                    className="w-8 h-8 webkit-checkbox"
+                    className="2xl:w-8 2xl:h-8 xl:w-7 xl:h-7 lg:h-6 lg:w-6 md:w-7 md:h-7 sm:w-6 sm:h-6 xs:w-5 xs:h-5 webkit-checkbox"
                 />
                 <div className='flex flex-col gap-2 items-start justify-center'>
-                        <div className='flex items-center justify-center gap-4'>
+                        <div className='flex items-center justify-center gap-3'>
                             <Reveal>
-                                <img src={values.icon} className={'w-8'}/>
+                                <img src={values.icon} className={'2xl:w-8 md:w-6 sm:w-5.5 xs:w-5'}/>
                             </Reveal>
                             <Reveal>
-                                <p className='text-3xl text-tertiary-white oswald-bold'>{values.title}</p>
+                                <p className='2xl:text-3xl xl:text-2xl lg:text-xl md:text-2xl sm:text-xl xs:text-base text-tertiary-white oswald-bold'>{values.title}</p>
                             </Reveal>
                         </div>
                     <Reveal>
-                        <p className='text-base text-tertiary-white oswald-regular'>{values.description}</p>
+                        <p className='2xl:text-base xl:text-sm lg:text-sm md:text-sm xs:text-xs text-tertiary-white oswald-regular'>{values.description}</p>
                     </Reveal>
                 </div>
 
             </div>
             <Reveal>
-                <p className='text-tertiary-white text-4xl oswald-bold '>{values.price}</p>
+                <p className='text-tertiary-white 2xl:text-4xl xl:text-3xl lg:text-2xl sm:text-3xl xs:text-2xl oswald-bold '>{values.price}</p>
             </Reveal>
         </div>
 
@@ -60,68 +59,66 @@ const PriceCard = ({values  ,selected ,  setSelected }) => {
 export const Pricing = () => {
 
     const [selectedFeatures, setSelectedFeatures] = useState(new Set());
+    const [contactOpen  , setContactOpen] = useState(false);
 
 
     const features = pricing.flatMap(price => price.features);
 
 
     return (
-        <div id='pricing' className='py-28 flex items-center justify-center gap-15 relative'>
-            <div className='flex items-center justify-between gap-20 w-full h-full   '>
-                    <div className=' w-1/2 flex flex-col items-start justify-between'>
+        <div id='pricing' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 flex items-center justify-center gap-15 relative'>
+            <div className='flex 2xs:flex-col lg:flex-row items-center justify-between gap-20 w-full h-full'>
+                    <div className=' lg:w-1/2 2xs:w-full flex flex-col items-start justify-between'>
                         <div>
                             <Reveal>
-                                <p className='oswald-semibold text-tertiary-white text-base '>Pricing</p>
+                                <p className='oswald-semibold text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl'>Pricing</p>
                             </Reveal>
                             <Reveal>
-                                <h2 className='akira text-primary-red text-5xl text-left leading-[1.05] mt-4'>
-                                    <span className=' akira block '>flexible plans</span>
-                                    <span className='akira block'>for every</span>
-                                    <span className='akira block'>business size</span>
+                                <h2 className='akira text-primary-red 2xs:text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-left leading-[1.05] mt-4'>
+                                    <span className=' akira 2xs:block lg:hidden'>flexible plans for every</span>
+                                    <span className=' akira block hidden lg:block'>flexible plans</span>
+                                    <span className='akira block  hidden lg:block'>for every</span>
+                                    <span className='akira block '>business size</span>
                                 </h2>
                             </Reveal>
                             <Reveal>
                                 <h2
-                                    className="oswald-regular text-lg text-tertiary-white text-left mt-6"
+                                    className="oswald-regular xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl text-tertiary-white text-left mt-4"
                                 >
                                     <span className=" block leading-relaxed">Whether you’re a startup or an established brand, we adapt to your needs.</span>
-                                    <span className=" block leading-relaxed">Example packages:</span>
                                 </h2>
                             </Reveal>
 
                         </div>
 
-                        <div className='w-full'>
-                            <p className='text-xl text-tertiary-white oswald-bold mt-20'>Included in every plan</p>
-                            <div className='grid grid-cols-2 w-full gap-x-5  gap-y-5 mt-6'>
-                                {
-                                    features.map((feature, index) => (
-                                        <Reveal>
-                                            <div
-                                                className='flex items-center justify-start gap-3'
-                                                key={index}
-                                            >
-                                                <img src={check}
-                                                     className={`${selectedFeatures.has(feature.id) ? '' : 'opacity-10'} w-6`}
-                                                     alt={'check'}
-                                                />
-                                                <p className='text-base oswald-regular text-tertiary-white'>{feature.feat}</p>
-                                            </div>
-                                        </Reveal>
-                                    ))
-                                }
+                        <div className='w-full lg:mt-20 2xs:mt-15'>
+                            <div className="grid lg:grid-cols-2 md:grid-cols-3 2xs:grid-cols-2 w-full gap-x-5 gap-y-5 mt-6">
+                                {features.map((feature, index) => (
+                                    <Reveal key={index}>
+                                        <div className="flex items-center gap-3 justify-start">
+                                            <img
+                                                src={check}
+                                                className={`${selectedFeatures.has(feature.id) ? '' : 'opacity-10'} 2xl:w-6 xs:w-4.5  md:w-5`}
+                                                alt="check"
+                                            />
+                                            <p className="2xl:text-base xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]  oswald-regular text-tertiary-white">
+                                                {feature.feat}
+                                            </p>
+                                        </div>
+                                    </Reveal>
+                                ))}
                             </div>
                         </div>
                     </div>
 
 
                 <div
-                    className=' w-1/2 p-8 flex flex-col items-center justify-between  rounded-lg border-[1px] border-tertiary-white/60'>
+                    className=' lg:w-1/2 2xs:w-full p-8 flex flex-col items-center justify-between  rounded-lg border-[1px] border-tertiary-white/60'>
                     <div className='flex flex-col items-center w-full justify-between'>
                         {pricing.map((price, index) => (
-                                <div key={price.title} className="w-full flex flex-col items-center  justify-between">
-                                    <PriceCard selected={selectedFeatures} setSelected={setSelectedFeatures}
-                                               index={index} size={pricing.length} values={price}/>
+                            <div key={price.title} className="w-full flex flex-col items-center  justify-between">
+                                <PriceCard selected={selectedFeatures} setSelected={setSelectedFeatures}
+                                           index={index} size={pricing.length} values={price}/>
                                     <div className="w-full h-px bg-tertiary-white/60 my-8"></div>
                                 </div>
                         ))}
@@ -130,9 +127,12 @@ export const Pricing = () => {
                     <div className='self-end'>
                         <Reveal>
                             <button
+                                onClick={() => setContactOpen(true)}
                                 className="akira   mt-6 bg-tertiary-white/90 hover:bg-tertiary-white
-                      duration-200 text-sm text-secondary-black cursor-pointer rounded-xs transition-colors
-                      py-5 px-9"
+                      duration-200  text-secondary-black cursor-pointer rounded-xs transition-colors
+                      2xs:text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+    2xs:py-2 2xs:px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-5 xl:px-9
+                      "
                             >
                                 get started today
                             </button>

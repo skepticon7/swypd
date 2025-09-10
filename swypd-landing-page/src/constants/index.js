@@ -37,21 +37,22 @@ const valuesItems = [
         title : "Human-first design",
         description : "We think like your users, not just like designers.",
         icon : users
-    },
+    }
+    ,
     {
         title : "Transparency",
         description: "Clear communication and no hidden surprises.",
         icon : transparency
     },
     {
+        title : "Partnership",
+        description: "Long term relationship, we grow when you grow",
+        icon : partnership
+    },
+    {
         title : "Quality & speed",
         description: "Professional results delivered on time.",
         icon : quality
-    },
-    {
-        title : "Partnership",
-        description: "We grow when you grow.",
-        icon : partnership
     }
 ]
 

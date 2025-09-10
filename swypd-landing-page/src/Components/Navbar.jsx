@@ -1,14 +1,128 @@
-import {useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 import {styles} from "../style.js";
 import {navItems} from "../constants/index.js";
-import {SwypdLogo} from "../assets/index.js";
-import {motion} from "framer-motion";
+import {Facebook, Instagram,X  , Linkedin, SwypdLogo, Tiktok} from "../assets/index.js";
+import {AnimatePresence, motion} from "framer-motion";
 import {fadeIn, textVariant} from "../Utils/motion.js";
+import { Sling as Hamburger } from 'hamburger-react'
+import Reveal from "./Reveal.jsx";
+
+
+const NavbarDropdown = ({  dropDownOpen, setDropDownOpen , active , setActive , setScrolled}) => {
+
+
+    const scrollToSection = (id, title) => {
+        setActive(title)
+        const element = document.getElementById(id)
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+        setDropDownOpen(false)
+    }
+
+    const handleLogoClick = () => {
+        setActive("")
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+        setScrolled(false)
+        setDropDownOpen(false)
+    }
+
+    return (
+        <AnimatePresence>
+            {dropDownOpen && (
+
+                <motion.div
+                    key="dropdown"
+                    initial={{ x: "100%" }}
+                    animate={{ x: 0 }}
+                    exit={{ x: "100%" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="absolute top-0 right-0 bg-tertiary-white/50 z-40 backdrop-blur-lg
+                     2xs:w-full md:w-2/3 "
+                >
+
+
+                    <div className="relative pt-20 pb-10 xs:px-4 2xs:px-3 sm:px-6 flex items-center justify-start">
+                        <button
+                            onClick={handleLogoClick}
+                        >
+                            <SwypdLogo
+                                className='md:w-28 sm:w-28 2xs:w-20 2xs:w-20 lg:w-30 2xs:hidden text-primary-red md:block left-5 h-auto top-9 absolute '/>
+                        </button>
+
+                        <div className='flex flex-col items-start justify-center gap-50 w-full'>
+                            <ul className="list-none flex flex-col gap-4">
+                                {navItems.map((item, index) => (
+                                    <motion.li
+                                        variants={textVariant(0.05 * index)}
+                                        initial="hidden"
+                                        animate="show"
+                                        key={item.id}
+                                        className={`relative ${
+                                            active === item.title ? "text-primary-red" : "text-secondary-black"
+                                        }
+                                         cursor-pointer oswald-regular 2xs:text-md xs:text-lg sm:text-xl  duration-200 transition-colors
+                                      `}
+                                        onClick={() => scrollToSection(item.id, item.title)}
+                                    >
+                                        <a href={`#${item.id}`}>{item.title}</a>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                            <div className='flex flex-col items-center justify-center w-full gap-2'>
+                                <p className='text-secondary-black 2xs:text-md xs:text-lg sm:text-xl oswald-semibold'>Socials</p>
+                                <div
+                                    className='flex  items-start justify-center gap-2 '>
+                                    <a>
+                                        <Facebook
+                                            className={'cursor-pointer text-secondary-black  xs:w-7 xs:h-7   duration-200 transition-colors'}/>
+                                    </a>
+
+                                    <a
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href={'https://www.instagram.com/swypdmedia/'}
+                                    >
+                                        <Instagram
+                                            className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
+                                    </a>
+
+                                    <a>
+                                        <X className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
+                                    </a>
+
+                                    <a>
+                                        <Tiktok
+                                            className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
+                                    </a>
+                                    <a>
+                                        <Linkedin
+                                            className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
+                                    </a>
+                                </div>
+                                <div className="w-full h-px bg-secondary-black mt-5"></div>
+                                    <p className='oswald-regular xs:text-xs md:text-sm lg:text-base xl:text-lg text-secondary-black text-sm mt-2'>©
+                                        2025 SWYPD. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
+};
 
 const Navbar = () => {
-    const [active , setActive] = useState("");
-    const [scrolled , setScrolled] = useState(false);
+    const [active, setActive] = useState("");
+    const [scrolled, setScrolled] = useState(false);
+    const [dropDownOpen, setDropDownOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,8 +152,6 @@ const Navbar = () => {
     }, [])
 
 
-
-
     const scrollToSection = (id, title) => {
         setActive(title)
         const element = document.getElementById(id)
@@ -58,19 +170,63 @@ const Navbar = () => {
             behavior: "smooth"
         })
         setScrolled(false)
+        setDropDownOpen(false)
     }
+
+    const dropDownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+                setDropDownOpen(false);
+            }
+        };
+
+        if (dropDownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropDownOpen, setDropDownOpen]);  useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+                setDropDownOpen(false);
+            }
+        };
+
+        if (dropDownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropDownOpen, setDropDownOpen]);
+
+
+
 
     return (
         <nav
-            className={`${styles.paddingX} w-full flex items-center py-5  fixed top-0 z-9999 bg-secondary-black ${
+            className={`${styles.paddingX}  w-full flex items-center py-5 xl:py-6 md:py-5 xs:py-5  fixed top-0 z-9999 bg-secondary-black ${
                 scrolled ? "border-b-2 border-primary-red" : ""
             }`}
         >
+
+
             <div
                 className={` w-full relative max-w-[100rem] p-0 mx-auto flex items-center justify-between`}
             >
-                <ul className="list-none flex gap-8">
-                    {navItems.map((item , index) => (
+
+
+                <ul className="list-none hidden xl:flex gap-8">
+                    {navItems.map((item, index) => (
                         <motion.li
                             variants={textVariant(0.1 * index)}
                             initial="hidden"
@@ -79,7 +235,7 @@ const Navbar = () => {
                             className={`relative ${
                                 active === item.title ? "text-primary-red" : "text-tertiary-white"
                             }
-            hover:text-primary-red cursor-pointer oswald-regular text-lg duration-200 transition-colors
+            hover:text-primary-red cursor-pointer oswald-regular 2xl:text-lg xl:text-md duration-200 transition-colors
           `}
                             onClick={() => scrollToSection(item.id, item.title)}
                         >
@@ -89,25 +245,31 @@ const Navbar = () => {
                 </ul>
 
                 <motion.a
-                    variants={fadeIn("up" , "spring" , 0.3 , 1)}
+                    variants={fadeIn("up", "spring", 0.3, 1)}
                     initial="hidden"
                     animate="show"
+                    className="md:absolute 2xs:z-50 md:z-40 md:left-1/2 md:transform md:-translate-x-1/2"
                     href={'/#'}
-                    className='absolute left-1/2 transform -translate-x-1/2'
                     onClick={handleLogoClick}
                 >
-                    <SwypdLogo className='w-32 h-full text-primary-red  cursor-pointer'/>
+                    <SwypdLogo
+                        className='xl:w-32 lg:w-30 md:w-28 sm:w-28 xs:w-20 2xs:w-20 w-18 h-full text-primary-red cursor-pointer'/>
                 </motion.a>
+
+                <button onClick={() => setDropDownOpen(!dropDownOpen)} className='xl:hidden z-50 sm:block order-2'>
+                    <Hamburger toggled={dropDownOpen} toggle={() => setDropDownOpen(prev => !prev)} color={dropDownOpen ? '#0B0A0A' : '#D9D9D9'}
+                               size={18}/>
+                </button>
 
                 <a
                     href={'/#pricing'}
                 >
                     <motion.button
-                        variants={fadeIn("left" , "spring" , 0.4 , 1)}
+                        variants={fadeIn("down", "spring", 0.4, 1)}
                         initial="hidden"
                         animate="show"
-                        className="akira text-tertiary-white bg-primary-red/90 hover:bg-primary-red
-             duration-200 cursor-pointer rounded-xs transition-colors
+                        className="akira md:block text-tertiary-white bg-primary-red/90 hover:bg-primary-red
+             duration-200 cursor-pointer rounded-xs transition-colors xl:text-base lg:text-sm md:text-xs hidden
              py-2.5 px-5"
                     >
                         get started
@@ -115,6 +277,11 @@ const Navbar = () => {
                 </a>
 
             </div>
+
+
+            <NavbarDropdown ref={dropDownRef} dropDownOpen={dropDownOpen} setScrolled={setScrolled} setDropDownOpen={setDropDownOpen} active={active} setActive={setActive} />
+
+
         </nav>
 
     )

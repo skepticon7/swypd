@@ -6,16 +6,16 @@ import Reveal from "./Reveal.jsx";
 
 const HowCard = ({icon , title , description}) => {
     return (
-        <div className='flex items-center justify-start gap-10'>
+        <div className='flex xs:flex-col md:flex-row xs:max-w-[12rem] md:max-w-full items-center xs:gap-2 xs:justify-center md:justify-start 2xl:gap-10 md:gap-5'>
             <Reveal>
-                <img className='w-[3.5rem]' src={icon}/>
+                <img className='2xl:w-12  md:w-9.5 xs:w-9' src={icon}/>
             </Reveal>
-            <div className='flex flex-col gap-2 items-start justify-center'>
+            <div className='flex flex-col gap-1 md:items-start  xs:items-center justify-center'>
                 <Reveal>
-                    <p className='oswald-bold text-xl text-tertiary-white'>{title}</p>
+                    <p className='oswald-bold xs:text-[0.9rem] sm:text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] xl:text-[1.5rem]    text-tertiary-white '>{title}</p>
                 </Reveal>
                 <Reveal>
-                    <p className='oswald-light text-base text-tertiary-white'>{description}</p>
+                    <p className='oswald-light xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]   text-tertiary-white xs:text-center md:text-left'>{description}</p>
                 </Reveal>
             </div>
         </div>
@@ -24,48 +24,66 @@ const HowCard = ({icon , title , description}) => {
 
 const How = () => {
     return(
-        <div id='how' className='py-28 flex items-center justify-center'>
-            <div className='flex items-center justify-between w-full h-full '>
-                <div className="">
+        <div id='how' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 flex items-center justify-center'>
+            <div className='flex md:flex-row xs:flex-col xs:gap-15 items-center justify-between w-full h-full '>
+                <div className="xl:self-center md:self-start md:w-1/2">
                     <Reveal>
-                        <p className='oswald-semibold text-tertiary-white text-base '>How it works</p>
+                        <p className='oswald-semibold text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl xs:text-center md:text-left'>How it works</p>
                     </Reveal>
 
                     <Reveal>
-                        <h2 className='akira text-primary-red text-5xl text-left leading-[1.05] mt-4'>
-                            <span className=' akira block '>Simple steps</span>
-                            <span className='akira block'>to bring your</span>
-                            <span className='akira block'>idea to life</span>
+                        <h2 className='akira text-primary-red 2xl:text-5xl xl:text-4xl sm:text-2xl xs:text-xl xs:text-center 2xs:text-lg md:text-left leading-[1.05] mt-4'>
+                            <span className=' akira xs:block md:hidden '>Simple steps to bring</span>
+                            <span className=' akira xs:block  md:hidden '>your idea to life</span>
+                            <span className=' akira md:block hidden '>Simple steps</span>
+                            <span className='akira md:block hidden'>to bring your</span>
+                            <span className='akira md:block hidden'>idea to life</span>
                         </h2>
                     </Reveal>
 
                     <Reveal>
                         <a href='/#pricing'>
                             <button
-                                className="akira  mt-6 bg-tertiary-white/90 hover:bg-tertiary-white
-                      duration-200 text-sm text-secondary-black cursor-pointer rounded-xs transition-colors
-                      py-5 px-9"
+                                className="akira hidden md:block  mt-6 bg-tertiary-white/90 hover:bg-tertiary-white
+                      duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
+                      2xs:text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+    2xs:py-2 2xs:px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-5 xl:px-9
+                      "
                             >
                                 talk to us about your idea
                             </button>
                         </a>
                     </Reveal>
-
-
                 </div>
-                <div className='flex flex-col gap-5 items-start  h-full'>
+                <div className='md:flex md:flex-col xs:grid xs:grid-cols-2 xs:gap-x-10 xs:gap-y-12 xl:gap-5 lg:gap-3 md:gap-2 md:items-start '>
                         <HowCard icon={discover} title={'Discover'}
                                  description={'We listen, understand your goals, and plan.'}/>
-                    <div className="w-px h-15 ml-7 bg-tertiary-white"></div>
+                    <div className="xs:hidden md:block w-px xl:h-15 lg:h-13 md:h-8 md:ml-5 xl:ml-7 lg:ml-6 bg-tertiary-white"></div>
                         <HowCard icon={create} title={'Create'}
                                  description={"Our designers and developers craft your solution."}/>
-                    <div className="w-px h-15 ml-7 bg-tertiary-white"></div>
+                    <div className="xs:hidden md:block w-px xl:h-15 lg:h-13 md:h-8 md:ml-5 xl:ml-7 lg:ml-6 bg-tertiary-white"></div>
                         <HowCard icon={launch} title={'Launch'}
                                  description={'We test, deliver, and celebrate your new product.'}/>
-                    <div className="w-px h-15 ml-7 bg-tertiary-white"></div>
+                    <div className="xs:hidden md:block w-px xl:h-15 lg:h-13 md:h-8 md:ml-5  xl:ml-7 lg:ml-6 bg-tertiary-white"></div>
                         <HowCard icon={support} title={'Support'}
                                  description={'Ongoing help to keep everything running smoothly.'}/>
                 </div>
+
+                <div className='md:hidden'>
+                    <Reveal>
+                        <a href='/#pricing' >
+                            <button
+                                className="akira bg-tertiary-white/90 hover:bg-tertiary-white
+                      duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
+                      2xs:text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+    2xs:py-2 2xs:px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-5 xl:px-9 "
+                            >
+                                talk to us about your idea
+                            </button>
+                        </a>
+                    </Reveal>
+                </div>
+
             </div>
         </div>
     )

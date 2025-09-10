@@ -13,7 +13,7 @@ const FAQItem = ({ question, answer }) => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <Reveal>
-                    <span>{question}</span>
+                    <span className='xs:text-[0.9rem] sm:text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] xl:text-[1.5rem] '>{question}</span>
                 </Reveal>
 
                 <Reveal>
@@ -36,7 +36,7 @@ const FAQItem = ({ question, answer }) => {
                         className="overflow-hidden text-tertiary-white text-base mt-3 oswald-regular"
                     >
                         <Reveal>
-                            <p>{answer}</p>
+                            <p className='xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]'>{answer}</p>
                         </Reveal>
                     </motion.div>
                 )}

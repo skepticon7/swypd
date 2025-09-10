@@ -8,12 +8,14 @@ import CTA from "./CTA.jsx";
 import SoftwareSlider from "./SoftwareSlider.jsx";
 import FAQ from "./FAQ.jsx";
 import Footer from "./Footer.jsx";
+import ContactModal from "./ContactModal.jsx";
 
 
 export {
     How,
     FAQ,
     Footer,
+    ContactModal,
     SoftwareSlider,
     CTA,
     Pricing,

@@ -7,140 +7,147 @@ import Reveal from "./Reveal.jsx";
 const Footer = () => {
     return (
         <div id='footer' className='py-10 flex items-center justify-center'>
-            <div className='flex flex-col gap-8 items-center justify-center w-full'>
+            <div className='flex flex-col  items-center justify-center w-full'>
                 <Reveal>
-                    <SwypdLogo className='text-tertiary-white w-xs h-auto'/>
+                    <SwypdLogo className='text-tertiary-white 2xl:w-xs xl:w-2xs lg:w-3xs md:w-[15rem] xs:w-[10rem] h-auto'/>
                 </Reveal>
-                <div className='flex flex-col items-center gap-8 justify-center w-full'>
-                    <div className='flex items-start justify-between w-full'>
-                        <div className=''>
+                <div className='flex flex-col items-center  justify-center w-full'>
+                    <div className='flex xs:flex-col md:flex-row items-start  md:gap-15 justify-between mt-10 xs:w-full'>
+                        <div className='xs:w-full md:w-1/2 xs:text-center md:text-left'>
                             <Reveal>
-                                <p className='text-tertiary-white text-lg oswald-semibold'>Stay in the loop.</p>
+                                <p className='text-tertiary-white xs:text-base md:text-lg lg:text-xl xl:text-2xl   oswald-semibold'>Stay
+                                    in the loop.</p>
                             </Reveal>
                             <Reveal>
-                                <p className='text-tertiary-white text-base mt-1 oswald-regular tracking-wide'>Get
+                                <p className='text-tertiary-white xs:text-xs md:text-sm lg:text-base xl:text-lg  mt-1 oswald-regular tracking-wide'>Get
                                     design tips, digital
                                     insights, and
                                     agency updates straight to your inbox. No spam, ever.</p>
                             </Reveal>
 
-                            <form onSubmit={(e) => {
-                                e.preventDefault()
-                            }}>
+                            <form onSubmit={(e) => e.preventDefault()}>
                                 <Reveal>
-                                    <div className="flex items-stretch gap-3 justify-start mt-7">
+                                    <div className="flex xs:w-full md:w-2/3 items-stretch mt-5 xs:gap-2 md:gap-5">
                                         <input
                                             type="text"
-                                            className="text-tertiary-white w-1/2 rounded-xs border border-tertiary-white/60 bg-transparent px-3 py-2 h-full "
+                                            className="flex-grow text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl
+                                            focus:outline-none rounded-xs border border-tertiary-white/60
+                                            bg-transparent px-2 py-2 h-full"
                                             placeholder="Enter your email"
                                         />
                                         <button
-                                            type={'submit'}
-                                            className="akira text-tertiary-white bg-primary-red/90 hover:bg-primary-red
-                                            duration-200 px-5 text-sm cursor-pointer rounded-xs transition-colors px-4 "
+                                            type="submit"
+                                            className="akira flex-shrink-0 text-tertiary-white bg-primary-red/90 hover:bg-primary-red
+                                                   duration-200 cursor-pointer rounded-xs transition-colors
+                                                   2xs:text-[0.7rem] xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+
+                                                   2xs:px-4 xs:px-5 sm:px-6 md:px-7 lg:px-7 xl:px-9"
                                         >
                                             join us
                                         </button>
                                     </div>
                                 </Reveal>
-
                             </form>
                             <Reveal>
-                                <p className='text-tertiary-white text-base mt-5'>You can unsubscribe anytime.</p>
+                                <p className='text-tertiary-white xs:text-xs md:text-sm lg:text-base xl:text-lg mt-5'>You
+                                    can unsubscribe anytime.</p>
                             </Reveal>
                         </div>
 
-                        <div className='flex flex-col items-start justify-center gap-8'>
-                            <Reveal>
-                                <p className='oswald-semibold text-tertiary-white'>Quick links</p>
-                            </Reveal>
 
-                            <div className='flex flex-col items-start justify-center gap-5 '>
+                        <div className='flex xs:flex-row  xs:w-full md:w-1/2 md:gap-5 items-start justify-between  xs:mt-8 md:mt-0'>
+                            <div className='flex flex-col items-start justify-center xs:gap-4 md:gap-8'>
                                 <Reveal>
-                                    <a href={'/#'}
-                                       className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>
-                                        Home
-                                    </a>
+                                    <p className='oswald-semibold xs:text-sm md:text-base lg:text-lg xl:text-xl text-tertiary-white'>Links</p>
                                 </Reveal>
-                                <Reveal>
-                                    <a href={'/#projects'}
-                                       className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>
-                                        Projects
-                                    </a>
-                                </Reveal>
-                                <Reveal>
-                                    <a href={'/#pricing'}
-                                       className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>
-                                        Pricing
-                                    </a>
-                                </Reveal>
-                                <Reveal>
-                                    <a href={'/#footer'} className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>
-                                        Contact
-                                    </a>
-                                </Reveal>
+
+                                <div className='flex flex-col items-start justify-center md:gap-5 xs:gap-3 '>
+                                    <Reveal>
+                                        <a href={'/#'}
+                                           className='cursor-pointer text-tertiary-white   xs:text-xs md:text-sm lg:text-base xl:text-lg   oswald-regular duration-200 transition-colors hover:underline'>
+                                            Home
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a href={'/#projects'}
+                                           className='cursor-pointer text-tertiary-white  xs:text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
+                                            Projects
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a href={'/#pricing'}
+                                           className='cursor-pointer text-tertiary-white  xs:text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
+                                            Pricing
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a href={'/#footer'}
+                                           className='cursor-pointer text-tertiary-white  xs:text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
+                                            Contact
+                                        </a>
+                                    </Reveal>
+                                </div>
                             </div>
-                        </div>
-
-
-                        <div className='flex flex-col items-start justify-center gap-8'>
-                            <Reveal>
-                                <p className='oswald-semibold text-tertiary-white'>Contact info</p>
-                            </Reveal>
-                            <div className='flex flex-col items-start justify-center gap-5 '>
+                            <div className='flex flex-col items-start justify-center xs:gap-4 md:gap-8'>
                                 <Reveal>
-                                    <a href="mailto:example@email.com"
-                                       className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>Email</a>
+                                    <p className='oswald-semibold xs:text-sm md:text-base lg:text-lg xl:text-xl  text-tertiary-white'>Contact</p>
                                 </Reveal>
-                                <Reveal>
-                                    <a href="tel:+1234567890"
-                                       className='cursor-pointer text-tertiary-white text-sm oswald-regular duration-200 transition-colors hover:underline'>Phone number</a>
-                                </Reveal>
+                                <div className='flex flex-col items-start justify-center  md:gap-5 xs:gap-3 '>
+                                    <Reveal>
+                                        <a href="mailto:example@email.com"
+                                           className='cursor-pointer text-tertiary-white  xs:text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>Email</a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a href="tel:+1234567890"
+                                           className='cursor-pointer text-tertiary-white xs:text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>Phone
+                                            number</a>
+                                    </Reveal>
+                                </div>
                             </div>
-                        </div>
-                        <div className='flex flex-col items-start justify-center gap-8'>
-                            <Reveal>
-                                <p className='oswald-semibold text-tertiary-white'>Socials</p>
-                            </Reveal>
-                            <div className='flex items-start justify-center gap-3 '>
+                            <div className='flex flex-col items-start justify-center xs:gap-4 md:gap-8'>
                                 <Reveal>
-                                    <a>
-                                        <Facebook
-                                            className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
-                                    </a>
+                                    <p className='oswald-semibold xs:text-sm md:text-base lg:text-lg xl:text-xl text-tertiary-white'>Socials</p>
                                 </Reveal>
-                                <Reveal>
-                                    <a
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={'https://www.instagram.com/swypdmedia/'}
-                                    >
-                                        <Instagram className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
-                                    </a>
-                                </Reveal>
-                                <Reveal>
-                                    <a>
-                                        <X className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
-                                    </a>
-                                </Reveal>
-                                <Reveal>
-                                    <a>
-                                        <Tiktok className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
-                                    </a>
-                                </Reveal>
-                                <Reveal>
-                                    <a>
-                                        <Linkedin className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
-                                    </a>
-                                </Reveal>
+                                <div className='flex xs:flex-col md:flex-row items-start justify-center xs:gap-2.5 md:gap-3 '>
+                                    <Reveal>
+                                        <a>
+                                            <Facebook
+                                                className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={'https://www.instagram.com/swypdmedia/'}
+                                        >
+                                            <Instagram className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a>
+                                            <X className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a>
+                                            <Tiktok className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
+                                        </a>
+                                    </Reveal>
+                                    <Reveal>
+                                        <a>
+                                            <Linkedin className={'cursor-pointer text-tertiary-white hover:text-primary-red duration-200 transition-colors'}/>
+                                        </a>
+                                    </Reveal>
+                                </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div className="w-full h-px bg-tertiary-white/60 "></div>
+                    <div className="w-full h-px bg-tertiary-white/60 mt-8"></div>
                     <Reveal>
-                        <p className='oswald-regular text-tertiary-white text-sm'>© 2025 SWYPD. All rights reserved.</p>
+                        <p className='oswald-regular xs:text-xs md:text-sm lg:text-base xl:text-lg text-tertiary-white text-sm mt-3'>© 2025 SWYPD. All rights reserved.</p>
                     </Reveal>
 
                 </div>

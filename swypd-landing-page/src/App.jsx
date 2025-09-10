@@ -9,7 +9,6 @@ function App() {
       <Navbar/>
       <Hero/>
       <Values/>
-      <SoftwareSlider/>
       <Projects/>
       <How/>
       <Pricing/>

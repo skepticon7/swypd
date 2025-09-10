@@ -34,11 +34,14 @@ import X from "./x.svg?react";
 import Instagram from "./Instagram.svg?react"
 import Facebook from "./Facebook.svg?react"
 import Tiktok from "./tiktok.svg?react"
-
+import Hamburger from "./hamburger.svg?react"
+import partyValues3 from "./party-values-3.svg";
 
 export {
     SwypdLogo,
     Tiktok,
+    partyValues3,
+    Hamburger,
     Facebook,
     Instagram,
     Linkedin,
