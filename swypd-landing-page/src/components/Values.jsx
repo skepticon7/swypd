@@ -64,6 +64,8 @@ const Values = () => {
                                 src={swypdReel}
                                 loop
                                 autoPlay
+                                playsInline
+                                preload="auto"
                                 muted
                                 className="!min-w-full 2xl:h-[42rem] xl:h-[35rem] lg:h-[30rem] md:h-[28rem] sm:h-[26rem] xs:h-[25rem] object-cover rounded-lg"
                             />

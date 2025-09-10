@@ -18,15 +18,7 @@ const FAQ = () => {
                             <span className='akira xs:hidden lg:block'>we've got you</span>
                         </h2>
                     </Reveal>
-                    <Reveal>
-                        <h2
-                            className="oswald-regular xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl text-tertiary-white text-left mt-4 tracking-wide"
-                        >
-                            Frequently asked questions ordered by popularity. Remember that if the visitor has not
-                            committed to the call to action, they may still have questions (doubts) that can be
-                            answered.
-                        </h2>
-                    </Reveal>
+
                     <div className="lg:flex xs:hidden items-center justify-start gap-4 mt-8">
                         <Reveal>
                             <p className='oswald-regular xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl text-tertiary-white'>
