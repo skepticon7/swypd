@@ -1,4 +1,4 @@
-import {zoomIn} from "../Utils/motion.js";
+import {zoomIn} from "../utils/motion.js";
 import {motion} from "framer-motion";
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import {create, discover, launch, support} from "../assets/index.js";

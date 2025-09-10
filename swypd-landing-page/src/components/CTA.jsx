@@ -1,6 +1,6 @@
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import { motion } from "framer-motion";
-import { fadeIn, textVariant, zoomIn } from "../Utils/motion.js";
+import { fadeIn, textVariant, zoomIn } from "../utils/motion.js";
 import {heroArrow, heroLine1, heroLine2} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
 

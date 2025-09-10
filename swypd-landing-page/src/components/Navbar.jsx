@@ -4,7 +4,7 @@ import {styles} from "../style.js";
 import {navItems} from "../constants/index.js";
 import {Facebook, Instagram,X  , Linkedin, SwypdLogo, Tiktok} from "../assets/index.js";
 import {AnimatePresence, motion} from "framer-motion";
-import {fadeIn, textVariant} from "../Utils/motion.js";
+import {fadeIn, textVariant} from "../utils/motion.js";
 import { Sling as Hamburger } from 'hamburger-react'
 import Reveal from "./Reveal.jsx";
 

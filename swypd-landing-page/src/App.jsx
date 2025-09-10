@@ -1,5 +1,5 @@
 
-import {Hero, How, Navbar, Pricing, Projects, Values, CTA, SoftwareSlider, Footer, FAQ} from "./Components/index.js";
+import {Hero, How, Navbar, Pricing, Projects, Values, CTA, SoftwareSlider, Footer, FAQ} from "./components/index.js";
 
 
 function App() {

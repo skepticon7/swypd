@@ -1,7 +1,7 @@
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import {Facebook, Instagram, Linkedin, SwypdLogo, Tiktok, X} from "../assets/index.js";
 import {motion} from "framer-motion";
-import {zoomIn} from "../Utils/motion.js";
+import {zoomIn} from "../utils/motion.js";
 import Reveal from "./Reveal.jsx";
 
 const Footer = () => {
