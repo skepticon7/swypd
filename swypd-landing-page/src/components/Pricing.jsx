@@ -4,7 +4,7 @@ import {useState} from "react";
 import {check, pricingSlime} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
 import {ContactModal} from "./index.js";
-import {Checkbox} from "@/components/ui/checkbox.jsx";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 const PriceCard = ({values  ,selected ,  setSelected }) => {

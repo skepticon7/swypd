@@ -2,7 +2,7 @@ import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import FAQItem from "./FAQItem.jsx";
 import {faqItems} from "../constants/index.js";
 import Reveal from "./Reveal.jsx";
-import {Checkbox} from "@/components/ui/checkbox.jsx";
+import { Checkbox } from "@/components/ui/checkbox";
 import {useState} from "react";
 import {ContactModal} from "@/components/index.js";
 
