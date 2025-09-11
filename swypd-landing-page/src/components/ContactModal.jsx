@@ -132,8 +132,8 @@ const ContactModal = ({ isOpen, onClose }) => {
                 text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
                 ${
                                         isFormValid
-                                            ? "bg-tertiary-white/90 hover:bg-tertiary-white text-secondary-black"
-                                            : "bg-tertiary-white/60  "
+                                            ? "bg-primary-red/90 hover:bg-tertiary-white text-secondary-black"
+                                            : "bg-primary-red/60  "
                                     }`}
                                 >
                                     send message
