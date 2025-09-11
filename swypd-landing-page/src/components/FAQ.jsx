@@ -15,6 +15,7 @@ const FAQ = () => {
         agree: false,
     });
 
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setForm({

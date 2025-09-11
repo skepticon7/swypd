@@ -3,6 +3,8 @@ import {Facebook, Instagram, Linkedin, SwypdLogo, Tiktok, X} from "../assets/ind
 import {motion} from "framer-motion";
 import {zoomIn} from "../utils/motion.js";
 import Reveal from "./Reveal.jsx";
+import {scrollToSection} from "@/utils/scrollToSection.js";
+import {handleLogoClick} from "@/utils/scrollToTop.js";
 
 const Footer = () => {
     return (
@@ -63,29 +65,24 @@ const Footer = () => {
 
                                 <div className='flex flex-col items-start justify-center md:gap-5 xs:gap-3 '>
                                     <Reveal>
-                                        <a href={'/#'}
+                                        <a onClick={handleLogoClick}
                                            className='cursor-pointer text-tertiary-white   text-xs md:text-sm lg:text-base xl:text-lg   oswald-regular duration-200 transition-colors hover:underline'>
                                             Home
                                         </a>
                                     </Reveal>
                                     <Reveal>
-                                        <a href={'/#projects'}
+                                        <a onClick={() => scrollToSection('projects')}
                                            className='cursor-pointer text-tertiary-white  text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
                                             Projects
                                         </a>
                                     </Reveal>
                                     <Reveal>
-                                        <a href={'/#pricing'}
+                                        <a onClick={() => scrollToSection('pricing')}
                                            className='cursor-pointer text-tertiary-white  text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
                                             Pricing
                                         </a>
                                     </Reveal>
-                                    <Reveal>
-                                        <a href={'/#footer'}
-                                           className='cursor-pointer text-tertiary-white  text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>
-                                            Contact
-                                        </a>
-                                    </Reveal>
+
                                 </div>
                             </div>
                             <div className='flex flex-col items-start justify-center xs:gap-4 md:gap-8'>
@@ -94,14 +91,14 @@ const Footer = () => {
                                 </Reveal>
                                 <div className='flex flex-col items-start justify-center  md:gap-5 xs:gap-3 '>
                                     <Reveal>
-                                        <a href="mailto:example@email.com"
+                                        <a href="mailto:contact@swypdmedia.com"
                                            className='cursor-pointer text-tertiary-white  text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>Email</a>
                                     </Reveal>
-                                    <Reveal>
-                                        <a href="tel:+1234567890"
-                                           className='cursor-pointer text-tertiary-white text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>Phone
-                                            number</a>
-                                    </Reveal>
+                                    {/*<Reveal>*/}
+                                    {/*    <a href="tel:+1234567890"*/}
+                                    {/*       className='cursor-pointer text-tertiary-white text-xs md:text-sm lg:text-base xl:text-lg  oswald-regular duration-200 transition-colors hover:underline'>Phone*/}
+                                    {/*        number</a>*/}
+                                    {/*</Reveal>*/}
                                 </div>
                             </div>
                             <div className='flex flex-col items-start justify-center gap-4 md:gap-8'>

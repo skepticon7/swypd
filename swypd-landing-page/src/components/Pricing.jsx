@@ -5,6 +5,7 @@ import {check, pricingSlime} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
 import {ContactModal} from "./index.js";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
+import {scrollToSection} from "@/utils/scrollToSection.js";
 
 
 const PriceCard = ({values  ,selected ,  setSelected }) => {
@@ -128,7 +129,9 @@ export const Pricing = () => {
 
                     <div className='w-full'>
                         <Reveal>
-                            <a href='#cta'>
+                            <a
+                                onClick={() => scrollToSection('cta')}
+                            >
                                 <button
                                     className="akira w-full     xs:mt-4 mt-2  bg-tertiary-white/90 hover:bg-tertiary-white
                       duration-200  text-secondary-black cursor-pointer rounded-xs transition-colors

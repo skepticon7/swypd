@@ -72,7 +72,7 @@ const NavbarDropdown = ({  dropDownOpen, setDropDownOpen , active , setActive , 
                                       `}
                                         onClick={() => scrollToSection(item.id, item.title)}
                                     >
-                                        <a href={`#${item.id}`}>{item.title}</a>
+                                        <a >{item.title}</a>
                                     </motion.li>
                                 ))}
                             </ul>
@@ -265,7 +265,7 @@ const Navbar = () => {
           `}
                             onClick={() => scrollToSection(item.id, item.title)}
                         >
-                            <a href={`#${item.id}`}>{item.title}</a>
+                            <a >{item.title}</a>
                         </motion.li>
                     ))}
                 </ul>
@@ -288,7 +288,7 @@ const Navbar = () => {
                 </button>
 
                 <a
-                    href={'/#pricing'}
+                    onClick={() => scrollToSection("cta" , "cta")}
                 >
                     <motion.button
                         variants={fadeIn("down", "spring", 0.4, 1)}

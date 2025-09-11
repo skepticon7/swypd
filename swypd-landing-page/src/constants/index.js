@@ -65,7 +65,7 @@ const pricing = [
         icon : ad,
         title : 'AD Strategy',
         description : 'Smart campaigns that reach the right audience.',
-        price : '$19',
+        price : '$1299',
         features: [
             {
                 id : 1 ,
@@ -81,7 +81,7 @@ const pricing = [
         icon : branding,
         title : "Branding",
         description: "Strong identity with logo, colors, and style.",
-        price : "$23",
+        price : "$699",
         features: [
             {
                 id : 3,
@@ -97,7 +97,7 @@ const pricing = [
         icon : ve,
         title : "Video Editing",
         description: "Engaging edits that tell your story.",
-        price : '$54',
+        price : '$149',
         features: [
             {
                 id : 5,
@@ -113,7 +113,7 @@ const pricing = [
         icon : coding,
         title : "Website Development",
         description: "Custom websites designed to convert.",
-        price : "$100",
+        price : "$600",
         features : [
             {
                 id : 7,

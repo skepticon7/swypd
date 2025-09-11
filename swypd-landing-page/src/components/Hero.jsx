@@ -3,9 +3,11 @@ import {heroArrow, heroCircle, heroLine1, heroLine2, heroSlime} from "../assets/
 import {motion} from "framer-motion"
 import { textVariant, fadeIn, zoomIn, slideIn, staggerContainer } from "../utils/motion.js";
 import Reveal from "./Reveal.jsx";
+import {scrollToSection} from "@/utils/scrollToSection.js";
 
 
 const Hero = () => {
+
     return (
         <section className='relative pt-21 xl:min-h-screen'>
             <div
@@ -61,7 +63,7 @@ const Hero = () => {
                         </Reveal>
 
                             <a
-                                href={'/#pricing'}
+                                onClick={() => scrollToSection("pricing")}
                             >
                                 <motion.button
                                     variants={fadeIn("up", "spring", 0.8, 1)}

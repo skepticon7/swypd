@@ -3,6 +3,7 @@ import {motion} from "framer-motion";
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import {create, discover, launch, support} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
+import {scrollToSection} from "@/utils/scrollToSection.js";
 
 const HowCard = ({icon , title , description}) => {
     return (
@@ -23,6 +24,7 @@ const HowCard = ({icon , title , description}) => {
 }
 
 const How = () => {
+
     return(
         <div id='how' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 py-10 flex items-center justify-center'>
             <div className='flex md:flex-row flex-col xs:gap-15 gap-11 items-center justify-between w-full h-full '>
@@ -42,7 +44,9 @@ const How = () => {
                     </Reveal>
 
                     <Reveal>
-                        <a href='#cta'>
+                        <a
+                            onClick={() => scrollToSection("cta")}
+                        >
                             <button
                                 className="akira hidden md:block  mt-6 bg-tertiary-white/90 hover:bg-tertiary-white
                       duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
