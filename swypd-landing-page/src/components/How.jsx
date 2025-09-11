@@ -42,7 +42,7 @@ const How = () => {
                     </Reveal>
 
                     <Reveal>
-                        <a href='/#pricing'>
+                        <a href='#cta'>
                             <button
                                 className="akira hidden md:block  mt-6 bg-tertiary-white/90 hover:bg-tertiary-white
                       duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
