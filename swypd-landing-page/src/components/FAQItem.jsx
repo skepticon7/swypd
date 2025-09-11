@@ -9,11 +9,11 @@ const FAQItem = ({ question, answer }) => {
     return (
         <>
             <button
-                className="flex justify-between w-full text-left text-tertiary-white oswald-semibold text-lg cursor-pointer"
+                className="flex justify-between items-center w-full text-left text-tertiary-white oswald-semibold text-lg cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <Reveal>
-                    <span className='xs:text-[0.9rem] sm:text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] xl:text-[1.5rem] '>{question}</span>
+                    <span className='2xs:text-[0.85rem] xs:text-[0.9rem] sm:text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] xl:text-[1.5rem] '>{question}</span>
                 </Reveal>
 
                 <Reveal>
@@ -36,7 +36,7 @@ const FAQItem = ({ question, answer }) => {
                         className="overflow-hidden text-tertiary-white text-base mt-3 oswald-regular"
                     >
                         <Reveal>
-                            <p className='xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]'>{answer}</p>
+                            <p className='2xs:text-[0.6rem] xs:text-[0.65rem]  sm:text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]'>{answer}</p>
                         </Reveal>
                     </motion.div>
                 )}

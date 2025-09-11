@@ -44,17 +44,17 @@ const NavbarDropdown = ({  dropDownOpen, setDropDownOpen , active , setActive , 
                     animate={{ x: 0 }}
                     exit={{ x: "100%" }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="absolute top-0 right-0 bg-tertiary-white/50 z-40 backdrop-blur-lg
+                    className="absolute top-0 right-0 bg-tertiary-white/50  z-40 backdrop-blur-lg
                      2xs:w-full md:w-2/3 "
                 >
 
 
-                    <div className="relative pt-20 pb-10 xs:px-4 2xs:px-3 sm:px-6 flex items-center justify-start">
+                    <div className="relative pt-20 pb-10  xs:px-4 2xs:px-3 sm:px-6 flex items-center justify-start">
                         <button
                             onClick={handleLogoClick}
                         >
                             <SwypdLogo
-                                className='md:w-28 sm:w-28 2xs:w-20 2xs:w-20 lg:w-30 2xs:hidden text-primary-red md:block left-5 h-auto top-9 absolute '/>
+                                className='md:w-28 sm:w-28  lg:w-30 2xs:hidden text-primary-red md:block left-5 h-auto top-7 absolute '/>
                         </button>
 
                         <div className='flex flex-col items-start justify-center gap-50 w-full'>
@@ -77,35 +77,61 @@ const NavbarDropdown = ({  dropDownOpen, setDropDownOpen , active , setActive , 
                                 ))}
                             </ul>
                             <div className='flex flex-col items-center justify-center w-full gap-2'>
-                                <p className='text-secondary-black 2xs:text-md xs:text-lg sm:text-xl oswald-semibold'>Socials</p>
+                                <motion.p
+                                    initial='hidden'
+                                    animate='show'
+                                    variants={fadeIn("right" , "spring" , 0.2 , 0.5)}
+                                    className='text-secondary-black 2xs:text-md xs:text-lg sm:text-xl oswald-semibold'
+                                >
+                                    Socials
+                                </motion.p>
                                 <div
-                                    className='flex  items-start justify-center gap-2 '>
-                                    <a>
+                                    className='flex  items-start justify-center gap-1.5 '>
+                                    <motion.a
+                                        variants={textVariant(0.1)}
+                                        initial="hidden"
+                                        animate="show"
+                                    >
                                         <Facebook
                                             className={'cursor-pointer text-secondary-black  xs:w-7 xs:h-7   duration-200 transition-colors'}/>
-                                    </a>
+                                    </motion.a>
 
-                                    <a
+                                    <motion.a
+                                        variants={textVariant(0.2)}
+                                        initial="hidden"
+                                        animate="show"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         href={'https://www.instagram.com/swypdmedia/'}
                                     >
                                         <Instagram
                                             className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
-                                    </a>
+                                    </motion.a>
 
-                                    <a>
+                                    <motion.a
+                                        variants={textVariant(0.3)}
+                                        initial="hidden"
+                                        animate="show"
+                                    >
                                         <X className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
-                                    </a>
+                                    </motion.a>
 
-                                    <a>
+                                    <motion.a
+                                        variants={textVariant(0.4)}
+                                        initial="hidden"
+                                        animate="show"
+                                    >
                                         <Tiktok
                                             className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
-                                    </a>
-                                    <a>
+                                    </motion.a>
+                                    <motion.a
+                                        variants={textVariant(0.5)}
+                                        initial="hidden"
+                                        animate="show"
+                                    >
                                         <Linkedin
                                             className={'cursor-pointer text-secondary-black xs:w-7 xs:h-7 sm:w-8 sm:h-8  duration-200 transition-colors'}/>
-                                    </a>
+                                    </motion.a>
                                 </div>
                                 <div className="w-full h-px bg-secondary-black mt-5"></div>
                                     <p className='oswald-regular xs:text-xs md:text-sm lg:text-base xl:text-lg text-secondary-black text-sm mt-2'>©
@@ -214,7 +240,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`${styles.paddingX}  w-full flex items-center py-5 xl:py-6 md:py-5 xs:py-5  fixed top-0 z-9999 bg-secondary-black ${
+            className={`${styles.paddingX}  w-full flex items-center py-5 xl:py-6 md:py-4 2xs:py-2   fixed top-0 z-9999 bg-secondary-black ${
                 scrolled ? "border-b-2 border-primary-red" : ""
             }`}
         >
@@ -253,7 +279,7 @@ const Navbar = () => {
                     onClick={handleLogoClick}
                 >
                     <SwypdLogo
-                        className='xl:w-32 lg:w-30 md:w-28 sm:w-28 xs:w-20 2xs:w-20 w-18 h-full text-primary-red cursor-pointer'/>
+                        className='xl:w-32 lg:w-30 md:w-28 sm:w-28 2xs:w-22 w-18 h-full text-primary-red cursor-pointer'/>
                 </motion.a>
 
                 <button onClick={() => setDropDownOpen(!dropDownOpen)} className='xl:hidden z-50 sm:block order-2'>

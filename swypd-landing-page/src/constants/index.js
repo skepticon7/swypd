@@ -24,11 +24,11 @@ const navItems = [
 ]
 
 const faqItems = [
-    { question : 'How long does a project take?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'How long does a project take?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'How long does a project take?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'How long does a project take?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'How long does a project take?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."}
+    { question : 'How long does a project take ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
+    { question : 'Do you offer ongoing support ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
+    { question : 'Can you work with my budget ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
+    { question : 'Can you work with my budget ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
+    { question : 'What makes us different ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."}
 
 ]
 

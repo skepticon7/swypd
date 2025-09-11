@@ -1,9 +1,56 @@
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import {Checkbox} from "@/components/ui/checkbox.js";
 
 const ContactModal = ({ isOpen, onClose }) => {
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 1023 && isOpen) {
+                onClose();
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [isOpen, onClose]);
+
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        message: "",
+        agree: false,
+    });
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setForm({
+            ...form,
+            [name]: type === "checkbox" ? checked : value,
+        });
+    };
+
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+    const isFormValid =
+        form.name.trim() !== "" &&
+        form.message.trim() !== "" &&
+        isValidEmail(form.email);
 
     return (
         <AnimatePresence>
@@ -11,55 +58,87 @@ const ContactModal = ({ isOpen, onClose }) => {
                 <div className="fixed inset-0 z-60 flex items-center justify-center bg-secondary-black/50 w-full">
                     <motion.div
                         key="modal"
-                        initial={{ x: "115%" }}
+                        initial={{ x: "200%" }}
                         animate={{ x: 0 }}
-                        exit={{ x: "115%" }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        className="bg-tertiary-white/50 backdrop-blur-lg shadow-lg rounded-md relative xs:w-[60%]"
+                        exit={{ x: "200%" }}
+                        transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
+                        className="bg-tertiary-white/50 backdrop-blur-lg shadow-lg rounded-sm relative xs:w-[50%] md:w-[40%]"
                     >
-                        <div className="xs:px-8 xs:py-4 sm:px-15 sm:py-10 2xl:py-20 2xl:px-50 flex flex-col gap-10 items-center justify-center">
+                        <div
+                            className="md:px-10 md:py-5 lg:px-15 lg:py-10 xl:px-20 xl:py-15 flex flex-col gap-10 items-center justify-center">
                             <div className="flex items-center justify-between w-full">
-                                <p className="oswald-semibold xs:text-xl">Contact us</p>
+                                <p className="oswald-semibold lg:text-2xl xl:text-3xl ">Contact us</p>
                                 <button
                                     onClick={onClose}
-                                    className="text-gray-500 duration-200 transition-all"
+                                    className="text-gray-500 duration-200 transition-all cursor-pointer"
                                 >
-                                    <X className="text-secondary-black" />
+                                    <X className="text-secondary-black/60 hover:text-secondary-black duration-200 transition-colors lg:w-6 lg:h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8"/>
                                 </button>
                             </div>
 
-                            <form className="flex flex-col gap-4 w-full">
+                            <form className='flex flex-col gap-4 w-full'>
                                 <input
+                                    autoComplete="off"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
                                     type="text"
-                                    className="flex-grow w-full text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl
-                             focus:outline-none rounded-xs border border-tertiary-white/60
-                             bg-transparent px-2 py-2 h-full"
-                                    placeholder="Your Full Name"
+                                    className="flex-grow oswald-light text-tertiary-white  lg:text-lg xl:text-xl
+                                            focus:outline-none rounded-xs border focus:ring-1 focus:ring-tertiary-white  border-tertiary-white/60
+                                            bg-transparent px-3 py-2 h-full"
+                                    placeholder="Your full name"
                                 />
                                 <input
+                                    autoComplete="off"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
                                     type="text"
-                                    className="flex-grow w-full text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl
-                             focus:outline-none rounded-xs border border-tertiary-white/60
-                             bg-transparent px-2 py-2 h-full"
-                                    placeholder="Your Email"
+                                    className="flex-grow oswald-light  text-tertiary-white  lg:text-lg xl:text-xl
+                                            focus:outline-none rounded-xs focus:ring-1 focus:ring-tertiary-white border border-tertiary-white/60
+                                            bg-transparent px-2 py-3 h-full"
+                                    placeholder="your email"
                                 />
                                 <textarea
-                                    className="flex-grow w-full text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl
-                             focus:outline-none rounded-xs border border-tertiary-white/60
-                             bg-transparent px-2 py-2 h-full"
-                                    placeholder="Let us hear from you ..."
+                                    autoComplete="off"
+                                    name="message"
+                                    value={form.message}
+                                    onChange={handleChange}
+                                    className="flex-grow oswald-light text-tertiary-white  lg:text-lg xl:text-xl
+                                            focus:outline-none rounded-xs border focus:ring-1 focus:ring-tertiary-white border-tertiary-white/60
+                                            bg-transparent px-2 py-3 max-h-40 "
+                                    placeholder="Let us hear from you..."
                                 ></textarea>
+                                <div className='flex items-center justify-start gap-2'>
+                                    <Checkbox
+                                        checked={form.agree}
+                                        onCheckedChange={(checked) =>
+                                            setForm({ ...form, agree: checked })
+                                        }
+                                        className='
+                                            w-4.5 h-4.5
+                                          data-[state=checked]:bg-primary-red
+                                          data-[state=checked]:border-tertiary-white
+                                          data-[state=checked]:text-tertiary-white
+                                          cursor-pointer
+                                          '
+                                    />
+                                    <p className='oswald-regular xs:text-xs sm:text-sm md:text-base text-secondary-black '>I
+                                        agree to receive news, updates, and offers by email.</p>
+                                </div>
+                                <button
+                                    disabled={!isFormValid}
+                                    className={`akira mt-3 cursor-pointer rounded-xs transition-colors py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
+                text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                ${
+                                        isFormValid
+                                            ? "bg-tertiary-white/90 hover:bg-tertiary-white text-secondary-black"
+                                            : "bg-tertiary-white/60  "
+                                    }`}
+                                >
+                                    send message
+                                </button>
                             </form>
-
-                            <button
-                                type="submit"
-                                className="akira w-full flex-shrink-0 text-tertiary-white bg-primary-red/90 hover:bg-primary-red
-                           duration-200 cursor-pointer rounded-xs transition-colors
-                           2xs:text-[0.7rem] xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
-                           2xs:px-4 2xs:py-2 xs:px-5 sm:px-6 md:px-7 lg:px-7 xl:px-9"
-                            >
-                                send message
-                            </button>
                         </div>
                     </motion.div>
                 </div>
