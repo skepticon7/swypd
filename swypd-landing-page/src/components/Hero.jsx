@@ -7,7 +7,7 @@ import Reveal from "./Reveal.jsx";
 
 const Hero = () => {
     return (
-        <section className='relative pt-21'>
+        <section className='relative pt-21 xl:min-h-screen'>
             <div
                 className=" md:py-42 sm:py-30 py-18 relative flex items-center justify-center"
             >
