@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import {Checkbox} from "@/components/ui/checkbox.js";
+import {Checkbox} from "@/components/ui/checkbox.jsx";
 
 const ContactModal = ({ isOpen, onClose }) => {
 
