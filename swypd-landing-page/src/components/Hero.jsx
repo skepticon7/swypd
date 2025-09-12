@@ -26,7 +26,7 @@ const Hero = () => {
                             </span>
                             <span
                                   className="akira 2xl:text-[3.2rem] xl:text-[3rem]  lg:text-[2.5rem] md:text-[2rem] sm:text-[1.7rem] xs:text-[1.2rem] text-[1rem] block">
-                                grows your business
+                                grow your business
                             </span>
 
                             <motion.img
