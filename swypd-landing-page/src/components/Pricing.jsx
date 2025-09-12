@@ -133,7 +133,7 @@ export const Pricing = () => {
                                 onClick={() => scrollToSection('cta')}
                             >
                                 <button
-                                    className="akira w-full     xs:mt-4 mt-2  bg-tertiary-white/90 hover:bg-tertiary-white
+                                    className="akira w-full xs:mt-4 mt-2 bg-tertiary-white/90 hover:bg-tertiary-white
                       duration-200  text-secondary-black cursor-pointer rounded-xs transition-colors
                       text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
     py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
