@@ -275,7 +275,6 @@ const Navbar = () => {
                     initial="hidden"
                     animate="show"
                     className="md:absolute 2xs:z-50 md:z-40 md:left-1/2 md:transform md:-translate-x-1/2"
-                    href={'/#'}
                     onClick={handleLogoClick}
                 >
                     <SwypdLogo
