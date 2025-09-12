@@ -24,13 +24,27 @@ const navItems = [
 ]
 
 const faqItems = [
-    { question : 'How long does a project take ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'Do you offer ongoing support ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'Can you work with my budget ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'Can you work with my budget ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."},
-    { question : 'What makes us different ?' , answer : "Depends on scope. Small websites can take 2–4 weeks, bigger ones longer."}
-
-]
+    {
+        question: 'How long does a project take?',
+        answer: 'It depends on the scope. Small websites can take 2–4 weeks, while larger projects may take longer.'
+    },
+    {
+        question: 'Do you offer ongoing support?',
+        answer: 'Yes, we provide maintenance and support packages tailored to your needs.'
+    },
+    {
+        question: 'Can you work with my budget?',
+        answer: 'We aim to create solutions that align with your budget while maintaining quality.'
+    },
+    {
+        question: 'What makes you different?',
+        answer: 'We focus on combining creativity, performance, and tailored strategies for each client.'
+    },
+    {
+        question: 'Do you work with international clients?',
+        answer: 'Absolutely! We collaborate with clients worldwide through remote communication.'
+    }
+];
 
 const valuesItems = [
     {
