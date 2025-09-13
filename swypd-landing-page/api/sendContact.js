@@ -12,6 +12,8 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'All fields are required.' });
         }
 
+        console.log("env var : " + process.env.BREVO_API_KEY);
+
         const brevoData = {
             sender: {
                 name: `${name} (via SWYPD Website)`,
