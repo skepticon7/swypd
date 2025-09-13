@@ -33,6 +33,31 @@ const FAQ = () => {
         form.name.trim() !== "" &&
         form.message.trim() !== "" &&
         isValidEmail(form.email);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('/api/sendContact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setForm({ name: '', email: '', message: '' });
+            } else {
+                console.error('Error:', result.error);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+        }
+    };
+
     return (
         <div id='faq' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 py-10 flex items-center justify-center w-full'>
             <div className='flex lg:flex-row flex-col items-start justify-center gap-10  w-full'>
@@ -81,7 +106,7 @@ const FAQ = () => {
                 </div>
                 <div className="flex flex-col gap-5 w-full lg:hidden items-start ">
                     <p className='text-tertiary-white text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl'>Didn't find your answer ?  <span className='text-primary-red'>Contact us</span></p>
-                    <form className='flex flex-col gap-4 w-full'>
+                    <form onSubmit={handleSubmit}  className='flex flex-col gap-4 w-full'>
                         <input
                             autoComplete="off"
                             name="name"
