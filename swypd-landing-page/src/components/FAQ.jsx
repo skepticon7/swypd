@@ -156,13 +156,6 @@ const FAQ = () => {
                         <button
                             disabled={!isFormValid}
                             type='submit'
-                            onClick={(e) => {
-                                e.preventDefault(); // Prevent form submission
-                                console.log("🟢 Button clicked!");
-                                console.log("Form valid:", isFormValid);
-                                console.log("Form data:", form);
-                                handleSubmit(e); 
-                            }}
                             className={`akira mt-3 cursor-pointer rounded-xs transition-colors py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
                 text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
                 ${

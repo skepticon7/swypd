@@ -52,6 +52,31 @@ const ContactModal = ({ isOpen, onClose }) => {
         form.message.trim() !== "" &&
         isValidEmail(form.email);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("testing")
+        console.log("hey" , form);
+        try {
+            const response = await fetch('/api/sendContact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setForm({ name: '', email: '', message: '' });
+            } else {
+                console.error('Error:', result.error);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+        }
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -76,7 +101,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                                 </button>
                             </div>
 
-                            <form className='flex flex-col gap-4 w-full'>
+                            <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-full'>
                                 <input
                                     autoComplete="off"
                                     name="name"
