@@ -36,7 +36,8 @@ const FAQ = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log("testing")
+        console.log("hey" , form);
         try {
             const response = await fetch('/api/sendContact', {
                 method: 'POST',
