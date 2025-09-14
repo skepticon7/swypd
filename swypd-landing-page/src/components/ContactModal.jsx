@@ -173,10 +173,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                                     }`}
                                 >
                                     {loading ? (
-                                        <div className='flex akira items-center justify-center gap-2'>
-                                            <span className="loading loading-spinner loading-md"></span>
-                                            Sending
-                                        </div>
+                                            'sending'
                                     ) : (
                                         'send message'
                                     )}
