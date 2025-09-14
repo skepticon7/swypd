@@ -5,9 +5,11 @@ import Reveal from "./Reveal.jsx";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 import {useState} from "react";
 import {ContactModal} from "@/components/index.js";
+import {toast} from "react-hot-toast";
 
 const FAQ = () => {
     const [contactModalOpen, setContactModalOpen] = useState(false);
+    const [loading , setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -36,9 +38,9 @@ const FAQ = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("testing")
-        console.log("hey" , form);
+
         try {
+            setLoading(true);
             const response = await fetch('/api/sendContact', {
                 method: 'POST',
                 headers: {
@@ -51,12 +53,18 @@ const FAQ = () => {
 
             if (response.ok) {
                 setForm({ name: '', email: '', message: '' });
+                toast.success("Email successfully sent");
             } else {
+                toast.error("Failed to send message");
                 console.error('Error:', result.error);
             }
         } catch (error) {
+            toast.error("Failed to send message");
             console.error('Network error:', error);
+        }finally {
+            setLoading(false);
         }
+
     };
 
     return (
@@ -159,12 +167,16 @@ const FAQ = () => {
                             className={`akira mt-3 cursor-pointer rounded-xs transition-colors py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
                 text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
                 ${
-                                isFormValid
+                                isFormValid && !loading
                                     ? "bg-tertiary-white/90 hover:bg-tertiary-white text-secondary-black"
                                     : "bg-tertiary-white/60  "
                             }`}
                         >
-                            send message
+                            {loading ? (
+                                'sending . . .'
+                            ) : (
+                                'send message'
+                            )}
                         </button>
                     </form>
                 </div>
