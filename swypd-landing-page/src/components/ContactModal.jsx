@@ -173,7 +173,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                                     }`}
                                 >
                                     {loading ? (
-                                            'sending'
+                                            'sending . . .'
                                     ) : (
                                         'send message'
                                     )}
