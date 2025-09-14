@@ -17,7 +17,13 @@ function App() {
           <CTA/>
       </div>
       <Footer/>
-      <Toaster/>
+        <Toaster
+            toastOptions={{
+                style : {
+                    background : '#D9D9D9'
+                }
+            }}
+            />
     </div>
   )
 }

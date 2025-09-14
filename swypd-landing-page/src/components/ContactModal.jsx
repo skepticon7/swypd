@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
+import {toast} from "react-hot-toast";
 
 const ContactModal = ({ isOpen, onClose }) => {
 
@@ -73,10 +74,13 @@ const ContactModal = ({ isOpen, onClose }) => {
 
             if (response.ok) {
                 setForm({ name: '', email: '', message: '' });
+                toast.success("Email successfully sent");
             } else {
+                toast.error("Failed to send message");
                 console.error('Error:', result.error);
             }
         } catch (error) {
+            toast.error("Failed to send message");
             console.error('Network error:', error);
         }finally {
             setLoading(false);
@@ -169,9 +173,9 @@ const ContactModal = ({ isOpen, onClose }) => {
                                     }`}
                                 >
                                     {loading ? (
-                                        <div className='flex items-center justify-center gap-2'>
-                                            <span className="loading loading-spinner loading-sm"></span>
-                                            <p>Sending...</p>
+                                        <div className='flex akira items-center justify-center gap-2'>
+                                            <span className="loading loading-spinner loading-md"></span>
+                                            Sending...
                                         </div>
                                     ) : (
                                         'send message'
