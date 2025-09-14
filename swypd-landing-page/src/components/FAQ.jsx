@@ -124,7 +124,7 @@ const FAQ = () => {
                             type="text"
                             className="flex-grow oswald-regular text-tertiary-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl
                                             focus:outline-none rounded-xs border focus:ring-1 focus:ring-tertiary-white  border-tertiary-white/60
-                                            bg-transparent px-3 py-2 h-full"
+                                            bg-transparent px-2 py-3 h-full"
                             placeholder="Your full name"
                         />
                         <input
