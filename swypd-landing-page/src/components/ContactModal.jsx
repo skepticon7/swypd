@@ -165,17 +165,17 @@ const ContactModal = ({ isOpen, onClose }) => {
                                 <button
                                     disabled={!isFormValid}
                                     className={`akira mt-3 cursor-pointer rounded-xs transition-colors py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
-                text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed text-tertiary-white sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                text-[0.7rem] xs:text-[0.75rem] text-tertiary-white sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
                 ${
-                                        isFormValid
+                                        isFormValid && !loading
                                             ? "bg-primary-red/90 hover:bg-primary-red "
-                                            : "bg-primary-red/60  "
+                                            : "bg-primary-red/60 cursor-not-allowed  "
                                     }`}
                                 >
                                     {loading ? (
                                         <div className='flex akira items-center justify-center gap-2'>
                                             <span className="loading loading-spinner loading-md"></span>
-                                            Sending...
+                                            Sending
                                         </div>
                                     ) : (
                                         'send message'

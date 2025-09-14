@@ -1,8 +1,7 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
-    console.log("here")
-    console.log("env var : " + process.env.BREVO_API_KEY);
+
 
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed. Use POST.' });
@@ -53,11 +52,8 @@ export default async function handler(req, res) {
         if (!brevoResponse.ok) {
             const errorData = await brevoResponse.json();
             console.error('Brevo API Error:', errorData);
-            toast.error("Failed to send message");
             return res.status(500).json({ error: 'Failed to send message.' });
         }
-
-        toast.success("Message send successfully");
         res.status(200).json({ message: 'Message sent successfully!' });
 
     } catch (error) {
