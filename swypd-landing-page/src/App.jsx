@@ -1,6 +1,6 @@
 
 import {Hero, How, Navbar, Pricing, Projects, Values, CTA, SoftwareSlider, Footer, FAQ} from "./components/index.js";
-
+import {Toaster} from "react-hot-toast"
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
           <CTA/>
       </div>
       <Footer/>
+      <Toaster/>
     </div>
   )
 }

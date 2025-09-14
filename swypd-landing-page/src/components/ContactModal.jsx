@@ -5,6 +5,8 @@ import { Checkbox } from "@/components/ui/checkbox.tsx";
 
 const ContactModal = ({ isOpen, onClose }) => {
 
+    const  [loading , setLoading] = useState(false);
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -16,6 +18,7 @@ const ContactModal = ({ isOpen, onClose }) => {
             document.body.style.overflow = "";
         };
     }, [isOpen]);
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -47,6 +50,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
+
     const isFormValid =
         form.name.trim() !== "" &&
         form.message.trim() !== "" &&
@@ -54,9 +58,9 @@ const ContactModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("testing")
-        console.log("hey" , form);
+
         try {
+            setLoading(true);
             const response = await fetch('/api/sendContact', {
                 method: 'POST',
                 headers: {
@@ -74,7 +78,10 @@ const ContactModal = ({ isOpen, onClose }) => {
             }
         } catch (error) {
             console.error('Network error:', error);
+        }finally {
+            setLoading(false);
         }
+
     };
 
     return (
@@ -121,7 +128,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                                     type="text"
                                     className="flex-grow oswald-light  text-tertiary-white  lg:text-lg xl:text-xl
                                             focus:outline-none rounded-xs focus:ring-1 focus:ring-tertiary-white border border-tertiary-white/60
-                                            bg-transparent px-2 py-3 h-full"
+                                            bg-transparent px-3 py-2 h-full"
                                     placeholder="your email"
                                 />
                                 <textarea
@@ -161,7 +168,14 @@ const ContactModal = ({ isOpen, onClose }) => {
                                             : "bg-primary-red/60  "
                                     }`}
                                 >
-                                    send message
+                                    {loading ? (
+                                        <div className='flex items-center justify-center gap-2'>
+                                            <span className="loading loading-spinner loading-sm"></span>
+                                            <p>Sending...</p>
+                                        </div>
+                                    ) : (
+                                        'send message'
+                                    )}
                                 </button>
                             </form>
                         </div>
