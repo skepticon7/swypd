@@ -49,7 +49,13 @@ export default async function handler(req, res) {
                 if (resubscribeResponse.ok) {
                     return res.status(200).json({ message: 'Email was blacklisted, but successfully resubscribed!' });
                 } else {
-                    const errorData = await resubscribeResponse.json();
+                    let errorData = {};
+                    try {
+                        errorData = await resubscribeResponse.json();
+                    } catch {
+                        // No JSON body
+                        errorData.message = 'Failed to resubscribe.';
+                    }
                     console.error('Brevo API error (resubscribe):', errorData);
                     return res.status(400).json({ error: errorData.message || 'Failed to resubscribe.' });
                 }
@@ -67,7 +73,12 @@ export default async function handler(req, res) {
             body: JSON.stringify(data),
         });
 
-        const responseData = await subscribeResponse.json();
+        let responseData = {};
+        try {
+            responseData = await subscribeResponse.json();
+        } catch {
+            // No JSON body
+        }
 
         if (subscribeResponse.ok) {
             res.status(200).json({ message: 'Successfully subscribed to the newsletter!' });
