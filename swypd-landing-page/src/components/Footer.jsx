@@ -38,12 +38,14 @@ const Footer = () => {
 
             if (response.ok) {
                 setForm({ email: ''});
-                toast.success(response.message || 'Successfully subscribed');
+                toast.success(result.message || 'Successfully subscribed');
             } else {
-                toast.error(response.error || "Failed to subscribe");
+                setForm({ email: ''});
+                toast.error(result.error || "Failed to subscribe");
                 console.error('Error:', result.error);
             }
         } catch (error) {
+            setForm({ email: ''});
             toast.error("Failed to subscribe");
             console.error('Network error:', error);
         }finally {
