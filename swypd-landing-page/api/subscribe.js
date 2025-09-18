@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
         if (checkContactResponse.ok) {
             const contactData = await checkContactResponse.json();
-
+            console.log(contactData);
             // If blacklisted, resubscribe
             if (contactData.emailBlacklisted) {
                 const resubscribeResponse = await fetch('https://api.brevo.com/v3/contacts', {
