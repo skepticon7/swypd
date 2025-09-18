@@ -81,6 +81,7 @@ const Footer = () => {
                                     <div className="flex w-full md:w-2/3 items-stretch mt-5 gap-2 md:gap-5">
                                         <input
                                             name='email'
+                                            autoComplete={'off'}
                                             value={form.email}
                                             onChange={(e) => setForm({ email : e.target.value})}
                                             type="text"

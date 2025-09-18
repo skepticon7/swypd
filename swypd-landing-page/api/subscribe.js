@@ -46,6 +46,7 @@ export default async function handler(req, res) {
 
             // If the user is unsubscribed from this list, delete their contact completely
             if (contactData.listIds && !contactData.listIds.includes(listId)) {
+                console.log("here true");
                 const deleteResponse = await fetch(
                     `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
                     {
