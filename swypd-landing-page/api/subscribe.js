@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             }
         );
         if (checkResponse.ok) {
-
+            const contactData = await checkResponse.json();
             if (contactData.emailBlacklisted) {
                 return res.status(403).json({
                     error: 'This email is blacklisted and cannot be subscribed.',
