@@ -5,8 +5,55 @@ import {zoomIn} from "../utils/motion.js";
 import Reveal from "./Reveal.jsx";
 import {scrollToSection} from "@/utils/scrollToSection.js";
 import {handleLogoClick} from "@/utils/scrollToTop.js";
+import {toast} from "react-hot-toast";
+import {useState} from "react";
 
 const Footer = () => {
+    const [form , setForm] = useState({
+        email : ''
+    });
+    const [loading , setLoading] = useState(false);
+
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const isFormValid = isValidEmail(form.email);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            setLoading(true);
+            const response = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setForm({ email: ''});
+                toast.success(response.message || 'Successfully subscribed');
+            } else {
+                toast.error(response.error || "Failed to subscribe");
+                console.error('Error:', result.error);
+            }
+        } catch (error) {
+            toast.error("Failed to subscribe");
+            console.error('Network error:', error);
+        }finally {
+            setLoading(false);
+        }
+
+    };
+
+
+
     return (
         <div id='footer' className='py-8 flex items-center justify-center'>
             <div className='flex flex-col items-center justify-center w-full'>
@@ -39,13 +86,20 @@ const Footer = () => {
                                         />
                                         <button
                                             type="submit"
-                                            className="akira flex-shrink-0 text-tertiary-white bg-primary-red/90 hover:bg-primary-red
+                                            disabled={!isFormValid}
+                                            className={`akira flex-shrink-0 text-tertiary-white 
                                                    duration-200 cursor-pointer rounded-xs transition-colors
                                                    2xs:text-[0.7rem] xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
 
-                                                   2xs:px-4 xs:px-5 sm:px-6 md:px-7 lg:px-7"
+                                                   2xs:px-4 xs:px-5 sm:px-6 md:px-7 lg:px-7
+                                                    ${isFormValid && !loading ? "bg-primary-red/90 hover:bg-primary-red" : "bg-primary-red/60"}
+                                                   `}
                                         >
-                                            join us
+                                            {loading ? (
+                                                'joining'
+                                            ) : (
+                                                'join us'
+                                            )}
                                         </button>
                                     </div>
                                 </Reveal>
