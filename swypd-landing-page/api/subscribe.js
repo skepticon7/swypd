@@ -1,4 +1,6 @@
-import fetch from 'node-fetch';
+// /api/subscribe.js
+import fetch from 'node-fetch'; // Remove if using native fetch
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed. Please use POST.' });
@@ -6,28 +8,68 @@ export default async function handler(req, res) {
 
     const { email } = req.body;
 
-
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: 'A valid email address is required.' });
+    }
 
     const data = {
         email: email,
-        listIds: [3],
-        updateEnabled: false,
+        listIds: [3], // replace with your actual list ID
+        updateEnabled: true,
     };
 
     try {
-        const response = await fetch('https://api.brevo.com/v3/contacts', {
+        // Check if contact exists
+        const checkContactResponse = await fetch(
+            `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'api-key': process.env.BREVO_API_KEY,
+                },
+            }
+        );
+
+        if (checkContactResponse.ok) {
+            const contactData = await checkContactResponse.json();
+
+            // If blacklisted, resubscribe
+            if (contactData.emailBlacklisted) {
+                const resubscribeResponse = await fetch('https://api.brevo.com/v3/contacts', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'api-key': process.env.BREVO_API_KEY,
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (resubscribeResponse.ok) {
+                    return res.status(200).json({ message: 'Email was blacklisted, but successfully resubscribed!' });
+                } else {
+                    const errorData = await resubscribeResponse.json();
+                    console.error('Brevo API error (resubscribe):', errorData);
+                    return res.status(400).json({ error: errorData.message || 'Failed to resubscribe.' });
+                }
+            }
+        }
+
+        // Normal subscribe
+        const subscribeResponse = await fetch('https://api.brevo.com/v3/contacts', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'api-key': process.env.BREVO_API_KEY
+                'api-key': process.env.BREVO_API_KEY,
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
-        const responseData = await response.json();
+        const responseData = await subscribeResponse.json();
 
-        if (response.ok) {
+        if (subscribeResponse.ok) {
             res.status(200).json({ message: 'Successfully subscribed to the newsletter!' });
         } else {
             console.error('Brevo API error:', responseData);
