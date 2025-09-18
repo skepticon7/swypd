@@ -74,10 +74,13 @@ const Footer = () => {
                                     agency updates straight to your inbox. No spam, ever.</p>
                             </Reveal>
 
-                            <form onSubmit={(e) => e.preventDefault()}>
+                            <form onSubmit={handleSubmit}>
                                 <Reveal>
                                     <div className="flex w-full md:w-2/3 items-stretch mt-5 gap-2 md:gap-5">
                                         <input
+                                            name='email'
+                                            value={form.email}
+                                            onChange={(e) => setForm({ email : e.target.value})}
                                             type="text"
                                             className="flex-grow text-tertiary-white text-xs xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl
                                             focus:outline-none rounded-xs border border-tertiary-white/60
@@ -89,7 +92,7 @@ const Footer = () => {
                                             disabled={!isFormValid}
                                             className={`akira flex-shrink-0 text-tertiary-white 
                                                    duration-200 cursor-pointer rounded-xs transition-colors
-                                                   2xs:text-[0.7rem] xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                                                   2xs:text-[0.7rem] disabled:cursor-not-allowed xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
 
                                                    2xs:px-4 xs:px-5 sm:px-6 md:px-7 lg:px-7
                                                     ${isFormValid && !loading ? "bg-primary-red/90 hover:bg-primary-red" : "bg-primary-red/60"}
