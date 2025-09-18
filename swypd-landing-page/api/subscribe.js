@@ -1,89 +1,59 @@
 // /api/subscribe.js
-import fetch from 'node-fetch';
-
-async function parseJSONSafe(response) {
-    try {
-        const text = await response.text(); // read the body once
-        return text ? JSON.parse(text) : {}; // parse only if not empty
-    } catch {
-        return {}; // fallback if invalid JSON
-    }
-}
+import fetch from 'node-fetch'; // Remove this line if using native fetch
 
 export default async function handler(req, res) {
+    // 1. Check if the request method is POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed. Please use POST.' });
     }
 
+    // 2. Get the email from the request body
     const { email } = req.body;
 
+    // 3. Validate the email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return res.status(400).json({ error: 'A valid email address is required.' });
     }
 
-    const listId = 3; // replace with your list ID
+    // 4. Prepare the data for the Brevo API
     const data = {
-        email,
-        listIds: [listId],
-        updateEnabled: true,
+        email: email,
+        listIds: [3], // Your list ID goes here
+        updateEnabled: false, // Set to true if you want to update existing contacts
     };
 
     try {
-        // Check if contact exists
-        const checkResponse = await fetch(
-            `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'api-key': process.env.BREVO_API_KEY,
-                },
-            }
-        );
-
-        let contactData = {};
-        if (checkResponse.ok) {
-            contactData = await parseJSONSafe(checkResponse);
-
-            if (contactData.emailBlacklisted) {
-                return res.status(403).json({
-                    error: 'This email is blacklisted and cannot be subscribed.',
-                });
-            }
-        }
-
-        // Subscribe or resubscribe
-        const subscribeResponse = await fetch('https://api.brevo.com/v3/contacts', {
+        // 5. Send the request to Brevo's API
+        const response = await fetch('https://api.brevo.com/v3/contacts', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'api-key': process.env.BREVO_API_KEY,
+                'api-key': process.env.BREVO_API_KEY || 'YOUR_BREVO_API_KEY' // Use env var for security
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         });
 
-        const responseData = await parseJSONSafe(subscribeResponse);
+        const responseData = await response.json();
 
-        if (subscribeResponse.ok) {
-            return res.status(200).json({
-                message: responseData.message || 'Successfully subscribed to the newsletter!',
-            });
+        // 6. Handle Brevo's response
+        if (response.ok) {
+            // Contact was created or updated successfully
+            res.status(200).json({ message: 'Successfully subscribed to the newsletter!' });
         } else {
+            // Brevo API returned an error (e.g., duplicate contact, invalid data)
             console.error('Brevo API error:', responseData);
-
+            // Check for "duplicate parameter" error (contact already exists)
             if (responseData.code === 'duplicate_parameter') {
-                return res.status(409).json({ error: 'This email is already subscribed.' });
+                res.status(409).json({ error: 'This email is already subscribed.' });
             } else {
-                return res.status(400).json({
-                    error: responseData.message || 'Failed to subscribe. Please try again later.',
-                });
+                res.status(400).json({ error: responseData.message || 'Failed to subscribe. Please try again later.' });
             }
         }
+
     } catch (error) {
+        // 7. Handle network errors
         console.error('Server error:', error);
-        return res.status(500).json({
-            error: 'Internal server error. Please try again later.',
-        });
+        res.status(500).json({ error: 'Internal server error. Please try again later.' });
     }
 }
