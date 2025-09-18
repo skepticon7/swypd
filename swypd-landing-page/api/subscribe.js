@@ -1,5 +1,5 @@
 // /api/subscribe.js
-import fetch from 'node-fetch'; // Remove if using native fetch
+import fetch from 'node-fetch'; // Remove if using native fetch in Node 18+
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -13,10 +13,11 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'A valid email address is required.' });
     }
 
+    const listId = 3; // Replace with your actual list ID
     const data = {
         email,
-        listIds: [3], // replace with your actual list ID
-        updateEnabled: true, // allows resubscribe if unsubscribed
+        listIds: [listId],
+        updateEnabled: true,
     };
 
     try {
@@ -36,11 +37,38 @@ export default async function handler(req, res) {
             const contactData = await checkResponse.json();
             console.log('💡 Contact data from Brevo:', contactData);
 
-            // If the email is blacklisted, we cannot resubscribe
+            // If the email is blacklisted
             if (contactData.emailBlacklisted) {
                 return res.status(403).json({
                     error: 'This email is blacklisted and cannot be subscribed.',
                 });
+            }
+
+            // If the user is unsubscribed from this list, delete their contact completely
+            if (contactData.listIds && !contactData.listIds.includes(listId)) {
+                const deleteResponse = await fetch(
+                    `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
+                    {
+                        method: 'DELETE',
+                        headers: {
+                            'Accept': 'application/json',
+                            'api-key': process.env.BREVO_API_KEY,
+                        },
+                    }
+                );
+
+                if (deleteResponse.ok) {
+                    console.log(`💡 Contact ${email} removed from Brevo completely.`);
+                    return res.status(200).json({
+                        message:
+                            'Your previous subscription has been removed. You can subscribe again.',
+                    });
+                } else {
+                    console.error('Failed to delete contact:', await deleteResponse.text());
+                    return res.status(500).json({
+                        error: 'Failed to remove unsubscribed email. Please try again later.',
+                    });
+                }
             }
         }
 
