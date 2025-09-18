@@ -162,7 +162,7 @@ const FAQ = () => {
                             <p className='oswald-light self-end text-xs sm:text-sm md:text-base text-tertiary-white/40 '>I agree to receive news, updates, and offers by email.</p>
                         </div>
                         <button
-                            disabled={!isFormValid}
+                            disabled={!isFormValid || loading}
                             type='submit'
                             className={`akira mt-3 cursor-pointer rounded-xs transition-colors py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
                 text-[0.7rem] xs:text-[0.75rem] disabled:cursor-not-allowed sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]

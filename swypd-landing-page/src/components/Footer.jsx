@@ -92,7 +92,7 @@ const Footer = () => {
                                         />
                                         <button
                                             type="submit"
-                                            disabled={!isFormValid}
+                                            disabled={!isFormValid || loading}
                                             className={`akira flex-shrink-0 text-tertiary-white 
                                                    duration-200 cursor-pointer rounded-xs transition-colors
                                                    2xs:text-[0.7rem] disabled:cursor-not-allowed xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
