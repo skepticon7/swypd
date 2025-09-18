@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             }
         );
         const jsonedCheck = await checkResponse.json()
-        console.log("check response : " + jsonedCheck)
+        console.log("check response : " + JSON.stringify(jsonedCheck))
         if (checkResponse.ok) {
             const contactData = await checkResponse.json();
             console.log('💡 Contact data from Brevo:', contactData);
