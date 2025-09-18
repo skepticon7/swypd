@@ -32,49 +32,15 @@ export default async function handler(req, res) {
                 },
             }
         );
-        const jsonedCheck = await checkResponse.json()
-        console.log("check response : " + JSON.stringify(jsonedCheck))
         if (checkResponse.ok) {
-            const contactData = await checkResponse.json();
-            console.log('💡 Contact data from Brevo:', contactData);
 
-            // If the email is blacklisted
             if (contactData.emailBlacklisted) {
                 return res.status(403).json({
                     error: 'This email is blacklisted and cannot be subscribed.',
                 });
             }
-
-            // If the user is unsubscribed from this list, delete their contact completely
-            if (contactData.listIds && !contactData.listIds.includes(listId)) {
-                console.log("here true");
-                const deleteResponse = await fetch(
-                    `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            'Accept': 'application/json',
-                            'api-key': process.env.BREVO_API_KEY,
-                        },
-                    }
-                );
-
-                if (deleteResponse.ok) {
-                    console.log(`💡 Contact ${email} removed from Brevo completely.`);
-                    return res.status(200).json({
-                        message:
-                            'Your previous subscription has been removed. You can subscribe again.',
-                    });
-                } else {
-                    console.error('Failed to delete contact:', await deleteResponse.text());
-                    return res.status(500).json({
-                        error: 'Failed to remove unsubscribed email. Please try again later.',
-                    });
-                }
-            }
         }
 
-        // Subscribe or resubscribe the contact
         const subscribeResponse = await fetch('https://api.brevo.com/v3/contacts', {
             method: 'POST',
             headers: {
@@ -85,12 +51,7 @@ export default async function handler(req, res) {
             body: JSON.stringify(data),
         });
 
-        let responseData = {};
-        try {
-            responseData = await subscribeResponse.json();
-        } catch {
-            // Response might be empty
-        }
+        const responseData = await subscribeResponse.json();
 
         if (subscribeResponse.ok) {
             const message =
