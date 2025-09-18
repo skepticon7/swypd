@@ -98,7 +98,7 @@ const Footer = () => {
                                                    2xs:text-[0.7rem] disabled:cursor-not-allowed xs:text-[0.70rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
 
                                                    2xs:px-4 xs:px-5 sm:px-6 md:px-7 lg:px-7
-                                                    ${isFormValid && !loading ? "bg-primary-red/90 hover:bg-primary-red" : "bg-primary-red/60"}
+                                                    ${isFormValid && !loading ? "bg-primary-red/90 hover:bg-primary-red" : "bg-primary-red/60 cursor-not-allowed"}
                                                    `}
                                         >
                                             {loading ? (
