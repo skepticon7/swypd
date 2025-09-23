@@ -1,156 +1,296 @@
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import {pricing} from "../constants/index.js";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {check, pricingSlime} from "../assets/index.js";
 import Reveal from "./Reveal.jsx";
 import {ContactModal} from "./index.js";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 import {scrollToSection} from "@/utils/scrollToSection.js";
+import {motion , AnimatePresence} from "framer-motion"
+import {containerVariants, fadeIn, itemVariants} from "@/utils/motion.js";
+import {useService} from "@/context/context.jsx";
 
 
-const PriceCard = ({values  ,selected ,  setSelected }) => {
-    const allIds = values.features.map(f => f.id);
-    const isChecked = allIds.every(id => selected.has(id));
 
-    const handleChange = () => {
-        setSelected(prev => {
-            const newSet = new Set(prev);
-
-            if (isChecked) {
-                allIds.forEach(id => newSet.delete(id));
-            } else {
-                allIds.forEach(id => newSet.add(id));
-            }
-
-            return newSet;
-        });
-    };
-    return (
-        <div className={`flex items-center justify-between  w-full h-full `}>
-            <div className='flex items-center justify-center md:gap-6 sm:gap-5 xs:gap-4 gap-3'>
-                <Checkbox
-                    checked={isChecked}
-                    onClick={handleChange}
-                    className="data-[state=checked]:bg-primary-red
-                                          data-[state=checked]:border-tertiary-white
-                                          data-[state=checked]:text-tertiary-white 2xl:w-8 2xl:h-8 xl:w-7 xl:h-7 lg:h-6 lg:w-6 md:w-7 md:h-7 sm:w-6 sm:h-6 xs:w-5 xs:h-5 h-4 w-4"
-                />
-                <div className='flex flex-col xs:gap-2 gap-1 items-start justify-center'>
-                        <div className='flex items-center justify-center gap-3'>
-                            <Reveal>
-                                <img src={values.icon} className={'2xl:w-8 md:w-6 sm:w-5.5 xs:w-5 w-4.5'}/>
-                            </Reveal>
-                            <Reveal>
-                                <p className='2xl:text-3xl xl:text-2xl lg:text-xl md:text-2xl sm:text-xl xs:text-base text-sm text-tertiary-white oswald-bold'>{values.title}</p>
-                            </Reveal>
-                        </div>
-                    <Reveal>
-                        <p className='2xl:text-base xl:text-sm lg:text-sm md:text-sm text-xs  text-tertiary-white oswald-regular'>{values.description}</p>
-                    </Reveal>
-                </div>
-
-            </div>
-            <Reveal>
-                <p className='text-tertiary-white 2xl:text-4xl xl:text-3xl lg:text-2xl sm:text-3xl xs:text-2xl oswald-bold '>{values.price}</p>
-            </Reveal>
-        </div>
-
-    )
-}
 
 
 export const Pricing = () => {
 
-    const [selectedFeatures, setSelectedFeatures] = useState(new Set());
     const [contactOpen  , setContactOpen] = useState(false);
+    const [activeItem, setActiveItem] = useState("ads")
+    const [mobilePack , setMobilePack] = useState('left');
+    const {selectedService , setSelectedService} = useService();
+
+    const navigationItems = [
+        { id: "ads", label: "AD Strategy" },
+        { id: "branding", label: "Branding" },
+        { id: "video", label: "Video Editing" },
+        { id: "website", label: "Web Dev" },
+    ]
 
 
-    const features = pricing.flatMap(price => price.features);
+    const handleContact = (serviceName) => {
+        console.log(serviceName);
+        setSelectedService(serviceName);
+        if(window.innerWidth <= 1023){
+            scrollToSection('contact')
+        }else{
+            setContactOpen(true);
+        }
+
+    }
 
 
     return (
-        <div id='pricing' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 py-10 flex items-center justify-center gap-15 relative'>
-            <div className='flex flex-col lg:flex-row items-center justify-between lg:gap-12 xl:gap-15 w-full h-full'>
-                    <div className=' lg:w-1/2 w-full flex flex-col items-start justify-between'>
-                        <div>
+        <div id='pricing' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 py-10 relative'>
+            <div className='flex flex-col  items-center justify-center gap-10'>
+                        <div className='flex flex-col gap-4 items-center justify-center text-center'>
                             <Reveal>
-                                <p className='oswald-semibold text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl'>Pricing</p>
+                                <h2 className='oswald-semibold text-tertiary-white xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl'>Pricing</h2>
                             </Reveal>
                             <Reveal>
-                                <h2 className='akira text-primary-red text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-left leading-[1.05] mt-4'>
-                                    <span className=' akira block md:hidden'>flexible plans for every</span>
-                                    <span className=' akira block hidden md:block'>flexible plans</span>
-                                    <span className='akira block  hidden md:block'>for every</span>
-                                    <span className='akira block '>business size</span>
+                                <h2 className='akira text-primary-red text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl  leading-[1.05]'>
+                                    <span className=' akira block '>flexible plans for </span>
+                                    <span className=' akira block '>every flexible plans</span>
                                 </h2>
                             </Reveal>
-                            <Reveal>
-                                <h2
-                                    className="oswald-regular xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl text-tertiary-white text-left mt-4"
-                                >
-                                    <span className=" block leading-relaxed">Whether you’re a startup or an established brand, we adapt to your needs.</span>
-                                </h2>
-                            </Reveal>
+                            {/*<Reveal>*/}
+                            {/*    <h2*/}
+                            {/*        className="oswald-regular xs:text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl text-tertiary-white text-left mt-4"*/}
+                            {/*    >*/}
+                            {/*        <span className=" block leading-relaxed">Whether you’re a startup or an established brand, we adapt to your needs.</span>*/}
+                            {/*    </h2>*/}
+                            {/*</Reveal>*/}
 
                         </div>
-
-                        <div className='w-full  lg:mt-7 xl:mt-10 xs:mt-8 xs:block hidden'>
-                            <div className="grid lg:grid-cols-2 md:grid-cols-3 xs:grid-cols-2   w-full gap-x-5 gap-y-5 ">
-                                {features.map((feature, index) => (
-                                    <Reveal key={index}>
-                                        <div className="flex items-start gap-3 justify-start">
-                                            <img
-                                                src={check}
-                                                className={`${selectedFeatures.has(feature.id) ? '' : 'opacity-10'} 2xl:w-6 xs:w-4.5 w-4.5 md:w-5`}
-                                                alt="check"
+                        <div className='flex flex-col gap-9 items-center justify-center w-full '>
+                            <div className="flex relative w-full items-center">
+                                {navigationItems.map((item) => (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => setActiveItem(item.id)}
+                                        className={`relative w-1/4  py-3 text-xs xs:text-sm sm:text-md md:text-sm lg:text-base xl:text-lg cursor-pointer border-b border-b-[1px] oswald-regular border-tertiary-white/60 transition-colors duration-200 z-10 ${
+                                            activeItem === item.id ? "text-white" : "text-gray-400 hover:text-gray-200"
+                                        }`}
+                                    >
+                                        <Reveal>
+                                            {item.label}
+                                        </Reveal>
+                                        {activeItem === item.id && (
+                                            <motion.div
+                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                                                layoutId="activeIndicator"
+                                                initial={false}
+                                                transition={{
+                                                    type: "spring",
+                                                    stiffness: 500,
+                                                    damping: 30,
+                                                }}
                                             />
-                                            <p className="2xl:text-base text-[0.7rem] xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[0.9rem] xl:text-[1rem]  oswald-regular text-tertiary-white">
-                                                {feature.feat}
-                                            </p>
-                                        </div>
-                                    </Reveal>
+                                        )}
+                                    </button>
                                 ))}
                             </div>
-                        </div>
-                    </div>
-
-
-                <div
-                    className=' lg:w-1/2 w-full p-3 xs:p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8 flex flex-col mt-8 items-center justify-between  rounded-sm border-[1px] border-tertiary-white/60'>
-                    <div className='flex flex-col items-center w-full justify-between'>
-                        {pricing.map((price, index) => (
-                            <div key={price.title} className="w-full flex flex-col items-center  justify-between">
-                                <PriceCard selected={selectedFeatures} setSelected={setSelectedFeatures}
-                                           index={index} size={pricing.length} values={price}/>
-                                    <div className="w-full h-px bg-tertiary-white/60 my-3 xs:my-4 sm:my-5 md:my-6 lg:my-7 xl:my-8"></div>
-                                </div>
-                        ))}
-                    </div>
-
-                    <div className='w-full'>
-                        <Reveal>
-                            <a
-                                onClick={() => scrollToSection('cta')}
-                            >
-                                <button
-                                    className="akira w-full xs:mt-4 mt-2 bg-tertiary-white/90 hover:bg-tertiary-white
-                      duration-200  text-secondary-black cursor-pointer rounded-xs transition-colors
-                      text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
-    py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
-                      "
+                            <div className='md:grid md:grid-cols-2 hidden w-full gap-5'>
+                                <div
+                                    className='md:p-5 lg:p-6 xl:p-7 border-1 border-tertiary-white/60 rounded-sm flex flex-col items-start justify-center gap-6'
                                 >
-                                    get started today
-                                </button>
-                            </a>
-                        </Reveal>
-                    </div>
+                                    <div className='flex flex-col items-start justify-center gap-1'>
+                                        <Reveal>
+                                            <h3 className='md:text-base lg:text-lg xl:text-xl oswald-bold text-tertiary-white'>{activeItem === 'website' ? 'Static Website Package' : 'One-Time Deal'}</h3>
+                                        </Reveal>
+                                        <Reveal>
+                                            <p className='md:text-sm lg:text-base xl:text-lg oswald-regular text-tertiary-white'>
+                                                {pricing[activeItem].oneTime.title}
+                                            </p>
+                                        </Reveal>
+                                    </div>
+                                    <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                    <Reveal>
+                                        <p  className='text-tertiary-white md:text-[2rem] lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].oneTime.price}/one time</p>
+                                    </Reveal>
 
+                                    <div className='w-full'>
+                                        <Reveal>
+                                            <button
+                                                onClick={() => handleContact( pricing[activeItem].oneTime.title)}
+                                                className="akira text-center  bg-tertiary-white/90 w-full hover:bg-tertiary-white
+                                    duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
+                                    text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                                    py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
+                                "
+                                            >
+                                                get started today
+                                            </button>
+                                        </Reveal>
+                                    </div>
+                                        <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                        <div className='flex flex-col items-start justify-center gap-3'>
+                                            {pricing[activeItem].oneTime.features.map((feature) => (
+                                                <Reveal>
+                                                    <div className="flex items-start gap-4 justify-start">
+                                                        <img
+                                                            src={check}
+                                                            className={`w-5`}
+                                                            alt="check"
+                                                        />
+                                                        <p className="2xl:text-base text-[0.7rem] xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[0.9rem] xl:text-[1rem]  oswald-regular text-tertiary-white">
+                                                            {feature}
+                                                        </p>
+                                                    </div>
+                                                </Reveal>
+                                            ))}
+                                        </div>
+                                </div>
+                                <div
+                                    className='md:p-5 lg:p-6 xl:p-7 border-1 border-tertiary-white/60 rounded-sm flex flex-col items-start justify-center gap-6'>
+                                    <div className='flex flex-col items-start justify-center gap-1'>
+                                        <Reveal>
+                                            <h3 className='md:text-base lg:text-lg xl:text-xl oswald-bold text-tertiary-white'>{activeItem === 'website' ? 'Website + Backend Package' : 'Partner Deal'}</h3>
+                                        </Reveal>
+                                        <Reveal>
+                                            <p className='md:text-sm lg:text-base xl:text-lg oswald-regular text-tertiary-white'>
+                                                {pricing[activeItem].partner.title}
+                                            </p>
+                                        </Reveal>
+                                    </div>
+                                    <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                    <Reveal>
+                                        <p className='text-tertiary-white md:text-[2rem]  lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].partner.price}/{activeItem === 'website' ? 'one time' : 'Month'}</p>
+                                    </Reveal>
+                                    <div className='w-full'>
+                                        <Reveal>
+                                            <button
+                                                onClick={() => handleContact(pricing[activeItem].partner.title)}
+                                                className="akira  bg-tertiary-white/90 w-full hover:bg-tertiary-white
+                                    duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
+                                    text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                                    py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
+                                "
+                                            >
+                                                get started today
+                                            </button>
+                                        </Reveal>
+                                    </div>
+                                    <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                    <div className='flex flex-col items-start justify-center gap-3'>
+                                        {pricing[activeItem].partner.features.map((feature) => (
+                                            <Reveal>
+                                                <div className="flex items-start gap-4 justify-start">
+                                                    <img
+                                                        src={check}
+                                                        className={`w-5`}
+                                                        alt="check"
+                                                    />
+                                                    <p className="2xl:text-base text-[0.7rem] xs:text-[0.65rem] sm:text-[0.75rem] md:text-[0.875rem] lg:text-[0.9rem] xl:text-[1rem]  oswald-regular text-tertiary-white">
+                                                        {feature}
+                                                    </p>
+                                                </div>
+                                            </Reveal>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
 
-                </div>
+                            <div
+                                className='p-5 xs:p-6 sm:p-7 md:hidden border-1 border-tertiary-white/60 rounded-sm w-full flex flex-col items-center justify-center gap-4 xs:gap-5 sm:gap-6'>
+                                <Reveal>
+                                    <div className='p-1.5 flex items-center justify-center gap-1 bg-white/10'>
+                                        <motion.button
+                                            onClick={() => {
+                                                if (mobilePack !== "left") setMobilePack("left");
+                                            }}
+                                            animate={{
+                                                backgroundColor: mobilePack === "left" ? "#D9D9D9" : "rgba(0, 0, 0, 0)",
+                                                color: mobilePack === 'left' ? "#0B0A0A" : "#D9D9D9"
+                                            }}
+                                            transition={{duration: 0.25, ease: "easeInOut"}}
+                                            className="px-5 py-2 text-xs xs:text-sm sm:text-base text-tertiary-white"
+                                        >
+                                            {activeItem === "website" ? "Starter Website" : "One-Time Deal"}
+                                        </motion.button>
 
+                                        <motion.button
+                                            onClick={() => {
+                                                if (mobilePack !== "right") setMobilePack("right");
+                                            }}
+                                            animate={{
+                                                backgroundColor: mobilePack === "right" ? "#D9D9D9" : "rgba(0, 0, 0, 0)",
+                                                color: mobilePack === 'right' ? "#0B0A0A" : "#D9D9D9"
+                                            }}
+                                            transition={{duration: 0.3, ease: "easeInOut"}}
+                                            className="px-5 py-2 text-xs xs:text-sm sm:text-base  text-tertiary-white"
+                                        >
+                                            {activeItem === "website" ? "Website + Backend" : "Partner Deal"}
+                                        </motion.button>
+                                    </div>
+                                </Reveal>
+                                <Reveal>
+                                    <p className='text-tertiary-white oswald-regular  text-sm text-center xs:text-lg sm:text-xl'>{mobilePack === 'left' ? pricing[activeItem].oneTime.title : pricing[activeItem].partner.title}</p>
+                                </Reveal>
+                                <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                <div className='self-start'>
+                                    <Reveal>
+                                        <p className='text-tertiary-white text-[1.9rem] xs:text-[2.3rem] sm:text-[2.7rem] oswald-bold'>
+                                            ${mobilePack === 'left' ? pricing[activeItem].oneTime.price : pricing[activeItem].partner.price}/{activeItem === 'website' ? 'one time' : 'Month'}
+                                        </p>
+                                    </Reveal>
+                                </div>
+                                <div className='w-full'>
+                                    <Reveal>
+                                        <button
+                                            onClick={() => handleContact(mobilePack === 'left' ? pricing[activeItem].oneTime.title : pricing[activeItem].partner.title)}
+                                            className="akira text-center  bg-tertiary-white/90 w-full hover:bg-tertiary-white
+                                    duration-200   text-secondary-black cursor-pointer rounded-xs transition-colors
+                                    text-[0.7rem] xs:text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] lg:text-[0.9rem] xl:text-[1rem]
+                                    py-2 px-4 xs:py-2.5 xs:px-5 sm:py-3 sm:px-6 md:py-3.5 md:px-7 lg:py-4 lg:px-7 xl:py-3.5 xl:px-7
+                                "
+                                        >
+                                            get started today
+                                        </button>
+                                    </Reveal>
+                                </div>
+                                <div className="w-full h-px bg-tertiary-white/60 "></div>
+                                <div className='flex flex-col self-start items-start justify-center gap-3'>
 
+                                    {mobilePack === 'left' && pricing[activeItem].oneTime.features.map((feature) => (
+                                        <Reveal>
+                                            <div className="flex items-center gap-3 justify-center">
+                                                <img
+                                                    src={check}
+                                                    className={`w-3 xs:w-4 sm:w-5`}
+                                                    alt="check"
+                                                />
+                                                <p className="  text-xs xs:text-sm sm:text-base  oswald-regular text-tertiary-white">
+                                                    {feature}
+                                                </p>
+                                            </div>
+                                        </Reveal>
+
+                                    ))}
+                                    {mobilePack === 'right' && pricing[activeItem].partner.features.map((feature) => (
+
+                                        <Reveal>
+                                            <div className="flex items-center gap-3 justify-center">
+                                                <img
+                                                    src={check}
+                                                    className={`w-3 xs:w-4 sm:w-5`}
+                                                    alt="check"
+                                                />
+                                                <p className="  text-xs xs:text-sm sm:text-base  oswald-regular text-tertiary-white">
+                                                    {feature}
+                                                </p>
+                                            </div>
+                                        </Reveal>
+
+                                    ))}
+                                </div>
+                            </div>
+
+                        </div>
             </div>
             <img className='absolute -left-90 -bottom-65 rotate-5 -z-10' src={pricingSlime}/>
+            <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)}/>
         </div>
     )
 }

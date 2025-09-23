@@ -3,27 +3,32 @@ import FAQItem from "./FAQItem.jsx";
 import {faqItems} from "../constants/index.js";
 import Reveal from "./Reveal.jsx";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ContactModal} from "@/components/index.js";
 import {toast} from "react-hot-toast";
+import {useService} from "@/context/context.jsx";
 
 const FAQ = () => {
     const [contactModalOpen, setContactModalOpen] = useState(false);
     const [loading , setLoading] = useState(false);
+    const {selectedService} = useService()
     const [form, setForm] = useState({
         name: "",
         email: "",
         message: "",
+        service : selectedService || " ",
         agree: false,
     });
 
 
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setForm({
+        setForm((prev) => ({
             ...form,
+            service : prev.service || selectedService,
             [name]: type === "checkbox" ? checked : value,
-        });
+        }));
     };
 
     const isValidEmail = (email) => {
@@ -66,6 +71,17 @@ const FAQ = () => {
         }
 
     };
+
+
+    useEffect(() => {
+        console.log(form);
+    } , [form])
+
+    useEffect(() => {
+        if (selectedService) {
+            setForm((prev) => ({ ...prev, service: selectedService }));
+        }
+    }, [selectedService]);
 
     return (
         <div id='faq' className='2xl:py-24 xl:py-20 lg:py-18 xs:py-15 py-10 flex items-center justify-center w-full'>
@@ -113,7 +129,7 @@ const FAQ = () => {
 
                     ))}
                 </div>
-                <div className="flex flex-col gap-5 w-full lg:hidden items-start ">
+                <div id='contact' className="flex flex-col gap-5 w-full lg:hidden items-start ">
                     <p className='text-tertiary-white text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl'>Didn't find your answer ?  <span className='text-primary-red'>Contact us</span></p>
                     <form onSubmit={handleSubmit}  className='flex flex-col gap-4 w-full'>
                         <input

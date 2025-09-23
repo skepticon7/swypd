@@ -9,7 +9,7 @@ import {scrollToSection} from "@/utils/scrollToSection.js";
 const Hero = () => {
 
     return (
-        <section className='relative pt-21 xl:min-h-screen'>
+        <section className='relative pt-21 lg:pt-35 xl:min-h-screen'>
             <div
                 className=" md:py-42 sm:py-30 py-18 relative flex items-center justify-center"
             >
@@ -37,7 +37,7 @@ const Hero = () => {
                                 animate="show"
                             />
                             <motion.img
-                                className="absolute 2xl:top-29.5 2xl:right-25  xl:top-27 xl:right-25 lg:top-23 lg:right-15 md:top-18 md:right-8 md:w-15 sm:top-15.5 sm:right-10 sm:w-10 xs:top-11 xs:right-8 w-8 top-8.5 right-4 xs:w-8"
+                                className="absolute 2xl:top-29.5 2xl:right-25  xl:top-26.5 xl:right-20 lg:top-22.5 lg:right-12 md:top-18 md:right-8 md:w-15 sm:top-15.5 sm:right-10 sm:w-10 xs:top-11 xs:right-8 w-8 top-8.5 right-4 xs:w-8"
                                 src={heroLine2}
                                 variants={fadeIn("left", "spring", 1, 1)}
                                 initial="hidden"
@@ -86,12 +86,12 @@ const Hero = () => {
                 </div>
             </div>
             <img
-                className="absolute 2xl:top-15 2xl:w-lg 2xl:-right-15  xl:-right-1 xl:top-25 xl:w-md lg:top-30 lg:right-15 lg:w-sm  md:top-35 md:right-20 md:w-xs sm:top-20 sm:-right-5 sm:w-2xs xs:top-10 xs:-right-10 xs:w-3xs w-[12rem] -right-18 top-15 -z-99"
+                className="absolute 2xl:top-30 2xl:w-lg 2xl:-right-15  xl:-right-1 xl:top-32 xl:w-md lg:top-37 lg:right-5 lg:w-sm  md:top-32 md:right-5 md:w-xs sm:top-20 sm:-right-5 sm:w-2xs xs:top-10 xs:-right-10 xs:w-3xs w-[12rem] -right-18 top-15 -z-99"
                 src={heroCircle}
 
             />
             <img
-                className="absolute 2xl:top-15 2xl:w-4xl 2xl:-left-35 2xl:rotate-5 xl:w-3xl xl:top-25 xl:-left-10 lg:top-25 lg:-left-25 lg:w-2xl  md:top-30 md:-left-30 md:w-xl sm:w-lg  sm:rotate-15 sm:-left-25 xs:rotate-15 xs:-left-30 xs:top-20 xs:w-md sm:top-25 top-20 rotate-30 -left-32 -z-99"
+                className="absolute 2xl:top-20 2xl:w-4xl 2xl:-left-40 2xl:rotate-5 xl:w-3xl xl:top-30 xl:-left-10 lg:top-35 lg:-left-25 lg:w-2xl  md:top-30 md:-left-30 md:w-xl sm:w-lg  sm:rotate-15 sm:-left-25 xs:rotate-15 xs:-left-30 xs:top-20 xs:w-md sm:top-25 top-20 rotate-30 -left-32 -z-99"
                 src={heroSlime}
 
             />

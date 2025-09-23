@@ -36,6 +36,10 @@ import Facebook from "./Facebook.svg?react"
 import Tiktok from "./tiktok.svg?react"
 import Hamburger from "./hamburger.svg?react"
 import partyValues3 from "./party-values-3.svg";
+import artBoard1 from "./Artboard 1.jpg";
+import artBoard2 from "./Artboard 2.jpg";
+import artBoard3 from "./Artboard 3.jpg";
+
 
 export {
     SwypdLogo,
@@ -46,6 +50,9 @@ export {
     Instagram,
     Linkedin,
     X,
+    artBoard1,
+    artBoard2,
+    artBoard3,
     ad,
     branding,
     check,

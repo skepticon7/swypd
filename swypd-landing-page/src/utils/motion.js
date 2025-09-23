@@ -16,6 +16,21 @@ export const textVariant = (delay) => {
     };
 };
 
+export const containerVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.08
+        },
+    },
+};
+
+export const itemVariants = {
+    hidden: { x: 100, opacity: 0 },
+    show: { x: 0, opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
+    exit: { x: -100, opacity: 0, transition: { duration: 0.4, ease: "easeInOut" } },
+};
+
 export const fadeIn = (direction, type, delay, duration) => {
     return {
         hidden: {

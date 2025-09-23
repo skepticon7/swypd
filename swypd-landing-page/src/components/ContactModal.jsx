@@ -3,11 +3,19 @@ import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 import {toast} from "react-hot-toast";
+import {useService} from "@/context/context.jsx";
 
 const ContactModal = ({ isOpen, onClose }) => {
 
     const  [loading , setLoading] = useState(false);
-
+    const {selectedService , setSelectedService} = useService()
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        message: "",
+        service : selectedService || "",
+        agree: false,
+    });
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -32,20 +40,22 @@ const ContactModal = ({ isOpen, onClose }) => {
         return () => window.removeEventListener("resize", handleResize);
     }, [isOpen, onClose]);
 
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        message: "",
-        agree: false,
-    });
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setForm({
-            ...form,
-            [name]: type === "checkbox" ? checked : value,
-        });
+        setForm((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value
+        }));
     };
+
+    const handleClose = () => {
+        setLoading(false);
+        setForm({name : '' , message: '' , email: '' , agree: false , service: ''})
+        setSelectedService(null);
+        onClose();
+    }
 
     const isValidEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,34 +69,62 @@ const ContactModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
-            setLoading(true);
-            const response = await fetch('/api/sendContact', {
+            const contactResponse = await fetch('/api/sendContact', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
             });
 
-            const result = await response.json();
+            const contactResult = await contactResponse.json();
 
-            if (response.ok) {
-                setForm({ name: '', email: '', message: '' });
-                toast.success("Email successfully sent");
-            } else {
-                toast.error("Failed to send message");
-                console.error('Error:', result.error);
+            if (!contactResponse.ok) {
+                throw new Error(contactResult.error || "Failed to send message");
             }
+
+            // 2️⃣ If user agreed to newsletter, subscribe them
+            if (form.agree) {
+                const subscribeResponse = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: form.email }),
+                });
+
+                const subscribeResult = await subscribeResponse.json();
+
+                if (!subscribeResponse.ok) {
+                    throw new Error(subscribeResult.error || "Failed to subscribe to newsletter");
+                }
+            }
+
+            toast.success("Message sent successfully!");
+            setForm({ name: '', email: '', message: '', agree: false });
+
         } catch (error) {
-            toast.error("Failed to send message");
-            console.error('Network error:', error);
-        }finally {
+            toast.error(error.message || "Something went wrong.");
+            console.error('Error:', error);
+        } finally {
             setLoading(false);
         }
-
     };
+
+    useEffect(() => {
+        if (isOpen) {
+            setForm({
+                name: "",
+                email: "",
+                message: "",
+                agree: false,
+                service: selectedService || "",
+            });
+        }
+    }, [isOpen, selectedService]);
+
+    useEffect(() => {
+        console.log(form);
+    } , [form])
 
     return (
         <AnimatePresence>
@@ -98,14 +136,14 @@ const ContactModal = ({ isOpen, onClose }) => {
                         animate={{ x: 0 }}
                         exit={{ x: "200%" }}
                         transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
-                        className="bg-tertiary-white/50 backdrop-blur-lg shadow-lg rounded-sm relative xs:w-[50%] md:w-[40%]"
+                        className="bg-tertiary-white/50 backdrop-blur-lg shadow-lg rounded-sm relative xs:w-[50%] md:w-[45%]"
                     >
                         <div
                             className="md:px-10 md:py-5 lg:px-15 lg:py-10 xl:px-20 xl:py-15 flex flex-col gap-10 items-center justify-center">
                             <div className="flex items-center justify-between w-full">
                                 <p className="oswald-semibold lg:text-2xl xl:text-3xl ">Contact us</p>
                                 <button
-                                    onClick={onClose}
+                                    onClick={handleClose}
                                     className="text-gray-500 duration-200 transition-all cursor-pointer"
                                 >
                                     <X className="text-secondary-black/60 hover:text-secondary-black duration-200 transition-colors lg:w-6 lg:h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8"/>
@@ -147,6 +185,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                                 ></textarea>
                                 <div className='flex items-center justify-start gap-2'>
                                     <Checkbox
+                                        name={'agree'}
                                         checked={form.agree}
                                         onCheckedChange={(checked) =>
                                             setForm({ ...form, agree: checked })

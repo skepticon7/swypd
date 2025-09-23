@@ -1,5 +1,6 @@
 import SectionWrapper from "../hoc/SectionWrapper.jsx";
 import {
+    artBoard1, artBoard2, artBoard3,
     djValues, heroSlime,
     partyValues,
     partyValues2,
@@ -28,93 +29,51 @@ const Projects = () => {
                     </Reveal>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-3 sm:gap-5 gap-2 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-10">
-                    <div className="md:row-span-5 row-span-3  ">
+                <div
+                    className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-10 auto-rows-[minmax(0,auto)]">
+                    {/* ArtBoard 1 */}
+                    <div className="row-span-3 md:row-span-5">
                         <Reveal>
-                            <img className="w-full rounded-md" src={partyValues}/>
+                            <img className="w-full h-full object-contain rounded-md" src={artBoard1}/>
                         </Reveal>
                     </div>
 
-                    <div className="md:col-start-1 md:row-start-6 md:row-span-3  col-start-1 row-start-4 row-span-3  ">
+                    {/* Service 1 Values */}
+                    <div className="row-span-2 md:col-start-1 md:row-start-6 md:row-span-3">
                         <Reveal>
-                            <img className="w-full rounded-md" src={service1values}/>
+                            <img className="w-full h-full object-contain rounded-md" src={service1values}/>
                         </Reveal>
                     </div>
 
-                    <div className="md:row-span-5 row-span-3  ">
+                    {/* ArtBoard 2 */}
+                    <div className="row-span-3 md:row-span-5">
                         <Reveal>
-                            <img className="w-full rounded-md" src={partyValues}/>
+                            <img className="w-full h-full object-contain rounded-md" src={artBoard2}/>
                         </Reveal>
-                        {/*<Reveal>*/}
-                        {/*    <img className="w-full rounded-md" src={swypdValues}/>*/}
-                        {/*</Reveal>*/}
                     </div>
 
-                    <div className="md:col-start-2 md:row-start-1 md:row-span-4 col-start-2 row-start-1 row-span-2 ">
+                    {/* Swypd Values */}
+                    <div className="row-span-2 md:col-start-2 md:row-start-1 md:row-span-3">
                         <Reveal>
-                            <img className="w-full rounded-md" src={swypdValues}/>
+                            <img className="w-full h-full object-contain rounded-md" src={swypdValues}/>
                         </Reveal>
-
-                        {/*<Reveal>*/}
-                        {/*    <img className="w-full rounded-md" src={djValues}/>*/}
-                        {/*</Reveal>*/}
                     </div>
 
-                    <div className="md:col-start-2 md:row-start-5 md:row-span-7 col-start-2 row-start-3 row-span-5 ">
-
+                    {/* DJ Values */}
+                    <div className="row-span-5 md:col-start-2 md:row-start-4 md:row-span-5">
                         <Reveal>
-                            <img className="w-full rounded-md" src={djValues}/>
+                            <img className="w-full h-full object-contain rounded-md" src={artBoard3}/>
                         </Reveal>
-
-                        {/*<Reveal>*/}
-                        {/*    <img className="w-full rounded-md" src={partyValues}/>*/}
-                        {/*</Reveal>*/}
                     </div>
 
-                    <div className="md:col-start-3 md:row-start-6 md:row-span-5  col-start-2 row-start-8 row-span-3 ">
+                    {/* Service 2 Values */}
+                    <div className="row-span-3 md:col-start-3 md:row-start-6">
                         <Reveal>
-                            <img className="w-full rounded-md" src={service2values}/>
+                            <img className="w-full h-full object-contain rounded-md" src={service2values}/>
                         </Reveal>
                     </div>
                 </div>
 
-                {/*<div className="columns-2 md:columns-3 sm:gap-5 gap-2 md:gap-6 lg:gap-7 xl:gap-8 2xl:gap-10">*/}
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={partyValues}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={service1values}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={swypdValues}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={djValues}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={partyValues}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="break-inside-avoid xs:mb-2 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8 2xl:mb-10">*/}
-                {/*        <Reveal>*/}
-                {/*            <img className="w-full rounded-md" src={service2values}/>*/}
-                {/*        </Reveal>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
 
             </div>
             <img className='absolute -z-10 xs:-left-30 xs:-top-0 -rotate-[10px] -left-30 top-0' src={projectSlime}/>
