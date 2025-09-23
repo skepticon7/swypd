@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.swypdmedia.com"
+        }
+      ],
+      "destination": "https://swypdmedia.com/:path*",
+      "permanent": true
+    }
+  ]
+}
