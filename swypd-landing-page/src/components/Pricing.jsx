@@ -107,7 +107,7 @@ export const Pricing = () => {
                                     </div>
                                     <div className="w-full h-px bg-tertiary-white/60 "></div>
                                     <Reveal>
-                                        <p  className='text-tertiary-white md:text-[2rem] lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].oneTime.price}/one time</p>
+                                        <p  className='text-tertiary-white md:text-[2rem] lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].oneTime.price}/One time</p>
                                     </Reveal>
 
                                     <div className='w-full'>
@@ -156,7 +156,7 @@ export const Pricing = () => {
                                     </div>
                                     <div className="w-full h-px bg-tertiary-white/60 "></div>
                                     <Reveal>
-                                        <p className='text-tertiary-white md:text-[2rem]  lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].partner.price}/{activeItem === 'website' ? 'one time' : 'Month'}</p>
+                                        <p className='text-tertiary-white md:text-[2rem]  lg:text-[2.2rem] xl:text-[2.5rem] oswald-bold'>${pricing[activeItem].partner.price}/{activeItem === 'website' ? 'One time' : 'Month'}</p>
                                     </Reveal>
                                     <div className='w-full'>
                                         <Reveal>
@@ -232,7 +232,7 @@ export const Pricing = () => {
                                 <div className='self-start'>
                                     <Reveal>
                                         <p className='text-tertiary-white text-[1.9rem] xs:text-[2.3rem] sm:text-[2.7rem] oswald-bold'>
-                                            ${mobilePack === 'left' ? pricing[activeItem].oneTime.price : pricing[activeItem].partner.price}/{activeItem === 'website' ? 'one time' : 'Month'}
+                                            ${mobilePack === 'left' ? pricing[activeItem].oneTime.price : pricing[activeItem].partner.price}/{activeItem === 'website' ? 'One time' : 'Month'}
                                         </p>
                                     </Reveal>
                                 </div>

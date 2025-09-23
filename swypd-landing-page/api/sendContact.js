@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { name, email, message } = req.body;
+        const { name, email, message , service } = req.body;
 
         if (!name || !email || !message) {
             return res.status(400).json({ error: 'All fields are required.' });
@@ -32,8 +32,10 @@ export default async function handler(req, res) {
             htmlContent: `
         <h3>New message from your website:</h3>
         <p><strong>From:</strong> ${name} (${email})</p>
+        <p><strong>Service :</strong> ${service}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
+        
         <br>
         <p><em>This message was sent from the contact form on your website.</em></p>
       `
