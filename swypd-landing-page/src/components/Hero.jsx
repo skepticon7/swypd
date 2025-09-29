@@ -63,7 +63,7 @@ const Hero = () => {
                         </Reveal>
 
                             <a
-                                onClick={() => scrollToSection("pricing")}
+                                onClick={() => scrollToSection("cta")}
                             >
                                 <motion.button
                                     variants={fadeIn("up", "spring", 0.8, 1)}

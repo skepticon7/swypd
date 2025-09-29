@@ -13,7 +13,6 @@ function App() {
               <Values/>
               <Projects/>
               <How/>
-              <Pricing/>
               <FAQ/>
               <div className='bg-primary-red'>
                   <CTA/>
